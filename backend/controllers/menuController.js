@@ -30,7 +30,8 @@ const getMenu = async (req, res, next) => {
           doc.data().calories,
           doc.data().image,
           doc.data().name,
-          doc.data().price
+          doc.data().price,
+          doc.data().quantity
         );
         menusArray.push(menu);
       });
