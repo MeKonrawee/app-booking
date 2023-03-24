@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/animation/ScaleRoute.dart';
-import 'package:flutter_app/pages/FoodDetailsPage.dart';
 
 import '../models/response/menu_response.dart';
 import '../services/menu_services.dart';
@@ -18,7 +16,7 @@ class _PopularFoodsWidgetState extends State<PopularFoodsWidget> {
       width: double.infinity,
       child: Column(
         children: <Widget>[
-          PopularFoodTitle(),
+          AllMenuFood(),
           Expanded(
             child: PopularFoodItems(),
           )
@@ -45,9 +43,6 @@ class PopularFoodTiles extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Navigator.push(context, ScaleRoute(page: FoodDetailsPages()));
-      },
       child: Column(
         children: <Widget>[
           Container(
@@ -57,7 +52,7 @@ class PopularFoodTiles extends StatelessWidget {
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: const BorderRadius.all(
-                    Radius.circular(5.0),
+                    Radius.circular(10.0),
                   ),
                 ),
                 child: Container(
@@ -86,11 +81,6 @@ class PopularFoodTiles extends StatelessWidget {
                                         offset: Offset(0.0, 0.75),
                                       ),
                                     ]),
-                                child: Icon(
-                                  Icons.favorite,
-                                  color: Color(0xFFfb3132),
-                                  size: 16,
-                                ),
                               ),
                             ),
                           ),
@@ -135,11 +125,6 @@ class PopularFoodTiles extends StatelessWidget {
                                       offset: Offset(0.0, 0.75),
                                     ),
                                   ]),
-                              child: Icon(
-                                Icons.near_me,
-                                color: Color(0xFFfb3132),
-                                size: 16,
-                              ),
                             ),
                           ),
                         ],
@@ -182,7 +167,7 @@ class PopularFoodTiles extends StatelessWidget {
   }
 }
 
-class PopularFoodTitle extends StatelessWidget {
+class AllMenuFood extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(

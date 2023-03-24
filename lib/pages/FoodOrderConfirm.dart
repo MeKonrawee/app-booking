@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/button.dart';
+import 'package:flutter_app/models/bookingDetail_Model.dart';
 import 'package:flutter_app/pages/AccountCustomer.dart';
 import 'package:flutter_app/pages/CaloriesCount.dart';
 
@@ -7,7 +8,11 @@ import '../animation/ScaleRoute.dart';
 import '../themes/constant.dart';
 
 class FoodOrderConfirm extends StatefulWidget {
-  const FoodOrderConfirm({Key key}) : super(key: key);
+  BookingDetailModel orderFood;
+  FoodOrderConfirm({
+    Key key,
+    @required this.orderFood,
+  }) : super(key: key);
 
   @override
   State<FoodOrderConfirm> createState() => _FoodOrderConfirmState();
@@ -71,7 +76,7 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                         height: 7,
                       ),
                       Text(
-                        "Table Number : ",
+                        "Table Number : ${widget.orderFood.tableName}",
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,

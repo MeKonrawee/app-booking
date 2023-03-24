@@ -30,56 +30,31 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:
-          // AdminPage(),
-          screen[currentIndex],
+      body: screen[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Table',
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.calculate_rounded),
-            label: 'Menu',
+            label: 'Calory',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.history_rounded),
+            label: 'History',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'User',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Booking',
+            label: 'Account',
           ),
         ],
         currentIndex: currentIndex,
         selectedItemColor: Color(0xFFfd5352),
         onTap: _onItemTapped,
       ),
-
-      // User
-      // screen[currentIndex],
-      // bottomNavigationBar: BottomNavigationBar(
-      //   type: BottomNavigationBarType.fixed,
-      //   items: const <BottomNavigationBarItem>[
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.home),
-      //       label: 'Home',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.calculate_rounded),
-      //       label: 'Calory',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.person),
-      //       label: 'Account',
-      //     ),
-      //   ],
-      //   currentIndex: currentIndex,
-      //   selectedItemColor: Color(0xFFfd5352),
-      //   onTap: _onItemTapped,
-      // ),
     );
   }
 }

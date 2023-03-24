@@ -131,7 +131,7 @@ class _BookingFoodWidgetState extends State<BookingFoodWidget> {
             // PopularFoodsWidget(),
             GestureDetector(
               onTap: () {
-                Navigator.push(context, ScaleRoute(page: MenuWidget()));
+                // Navigator.push(context, ScaleRoute(page: MenuWidget()));
               },
               child: Container(
                 color: Colors.transparent,

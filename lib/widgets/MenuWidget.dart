@@ -1,10 +1,20 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/animation/ScaleRoute.dart';
+import 'package:flutter_app/controllers/cartList.dart';
+import 'package:flutter_app/models/response/menu_response.dart';
 import 'package:flutter_app/pages/FoodOrderPage.dart';
+import 'package:flutter_app/services/menu_services.dart';
+import 'package:flutter_app/widgets/PopularFoodsWidget.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../themes/constant.dart';
 
 class MenuWidget extends StatefulWidget {
+  int people;
+  String table;
+  MenuWidget(@required this.people, @required this.table);
   @override
   _MenuWidgetState createState() => _MenuWidgetState();
 }
@@ -27,80 +37,49 @@ class _MenuWidgetState extends State<MenuWidget> {
         ),
         brightness: Brightness.light,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
+      body: FutureBuilder<List<MenusResponse>>(
+        future: MenusService.getMenu(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            List<MenusResponse> carouselCard = snapshot.data;
+            carouselCard.sort((a, b) => a.price.compareTo(b.price));
+            return Padding(
               padding: const EdgeInsets.all(20.0),
-              child: GridView.builder(
-                physics: NeverScrollableScrollPhysics(),
+              child: MasonryGridView.builder(
                 shrinkWrap: true,
-                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 300,
-                  childAspectRatio: 3 / 3.7,
-                  crossAxisSpacing: 20,
-                  mainAxisSpacing: 20,
+                gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
                 ),
-                itemCount: 20,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20,
+                itemCount: carouselCard.length,
                 itemBuilder: (context, index) {
-                  return BoxItemFood(idFood: index);
-                  // Container(
-                  //   alignment: Alignment.centerLeft,
-                  //   width: double.infinity,
-                  //   decoration: BoxDecoration(
-                  //     color: Colors.white,
-                  //     borderRadius: BorderRadius.circular(20),
-                  //   ),
-                  //   child: Padding(
-                  //     padding: const EdgeInsets.all(15),
-                  //     child: Column(
-                  //       crossAxisAlignment: CrossAxisAlignment.start,
-                  //       children: [
-                  //         Image.asset("assets/images/menus/pho.png"),
-                  //         SizedBox(
-                  //           height: 7,
-                  //         ),
-                  //         Text(
-                  //           "Food Name : ",
-                  //           style: TextStyle(
-                  //             color: Color.fromARGB(255, 32, 32, 32),
-                  //             fontFamily: defaultFontFamily,
-                  //             fontSize: 16,
-                  //           ),
-                  //         ),
-                  //         SizedBox(
-                  //           height: 7,
-                  //         ),
-                  //         Text(
-                  //           "Calories : ",
-                  //           style: TextStyle(
-                  //             color: Color.fromARGB(255, 32, 32, 32),
-                  //             fontFamily: defaultFontFamily,
-                  //             fontSize: 16,
-                  //           ),
-                  //         ),
-                  //         SizedBox(
-                  //           height: 7,
-                  //         ),
-                  //         Text(
-                  //           "Price : ",
-                  //           style: TextStyle(
-                  //             color: Color.fromARGB(255, 32, 32, 32),
-                  //             fontFamily: defaultFontFamily,
-                  //             fontSize: 16,
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // );
+                  return BoxItemFood(
+                    dataMenu: carouselCard[index],
+                    func: () {
+                      setState(() {
+                        carouselCard[index].quantity++;
+                        var duplicate = CartFood.firstWhere(
+                          (element) => element.id == carouselCard[index].id,
+                          orElse: () => null,
+                        );
+                        if (duplicate == null) {
+                          CartFood.add(carouselCard[index]);
+                        } else {
+                          duplicate.quantity++;
+                        }
+                      });
+                    },
+                  );
                 },
               ),
-            ),
-            // BoxItemFood(),
-          ],
-        ),
+            );
+          } else {
+            return Container();
+          }
+        },
       ),
+
       floatingActionButton: Container(
         child: FittedBox(
           child: Stack(
@@ -108,13 +87,14 @@ class _MenuWidgetState extends State<MenuWidget> {
             children: [
               FloatingActionButton(
                 // Your actual Fab
-                onPressed: () {
-                  Navigator.push(
+                onPressed: () async {
+                  await Navigator.push(
                     context,
                     ScaleRoute(
-                      page: FoodOrderPage(),
+                      page: FoodOrderPage(widget.people,widget.table),
                     ),
                   );
+                  setState(() {});
                 },
                 child: Icon(Icons.shopping_cart),
                 backgroundColor: Colors.orange,
@@ -124,7 +104,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                 child: Center(
                   // Here you can put whatever content you want inside your Badge
                   child: Text(
-                    '1',
+                    CartFood.length.toString(),
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -179,67 +159,64 @@ class _MenuWidgetState extends State<MenuWidget> {
 class BoxItemFood extends StatelessWidget {
   BoxItemFood({
     Key key,
-    this.idFood,
+    this.dataMenu,
+    this.func,
   }) : super(key: key);
 
-  var idFood;
+  MenusResponse dataMenu;
+  Function() func;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        print(idFood);
-      },
-      child: Opacity(
-        opacity: 1,
-        child: Container(
-          alignment: Alignment.centerLeft,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Image.asset("assets/images/menus/pho.png"),
-                SizedBox(
-                  height: 7,
+      onTap: func,
+      child: Container(
+        alignment: Alignment.centerLeft,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Image.network(dataMenu.image),
+              SizedBox(
+                height: 7,
+              ),
+              Text(
+                "Food Name : ${dataMenu.name}",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 32, 32, 32),
+                  fontFamily: defaultFontFamily,
+                  fontSize: 14,
                 ),
-                Text(
-                  "Food Name : ",
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 32, 32, 32),
-                    fontFamily: defaultFontFamily,
-                    fontSize: 14,
-                  ),
+              ),
+              SizedBox(
+                height: 7,
+              ),
+              Text(
+                "Calories : ${dataMenu.calories}",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 32, 32, 32),
+                  fontFamily: defaultFontFamily,
+                  fontSize: 14,
                 ),
-                SizedBox(
-                  height: 7,
+              ),
+              SizedBox(
+                height: 7,
+              ),
+              Text(
+                "Price : ${dataMenu.price}",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 32, 32, 32),
+                  fontFamily: defaultFontFamily,
+                  fontSize: 14,
                 ),
-                Text(
-                  "Calories : ",
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 32, 32, 32),
-                    fontFamily: defaultFontFamily,
-                    fontSize: 14,
-                  ),
-                ),
-                SizedBox(
-                  height: 7,
-                ),
-                Text(
-                  "Price : ",
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 32, 32, 32),
-                    fontFamily: defaultFontFamily,
-                    fontSize: 14,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

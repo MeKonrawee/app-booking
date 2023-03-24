@@ -1,4 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_app/controllers/cartList.dart';
+import 'package:flutter_app/models/bookingDetail_Model.dart';
+import 'package:flutter_app/models/response/menu_response.dart';
 import 'package:flutter_app/pages/FoodOrderConfirm.dart';
 
 import '../animation/ScaleRoute.dart';
@@ -6,12 +11,42 @@ import '../common/button.dart';
 import '../themes/constant.dart';
 
 class FoodOrderPage extends StatefulWidget {
+  int people;
+  String table;
+  FoodOrderPage(@required this.people, @required this.table);
   @override
   _FoodOrderPageState createState() => _FoodOrderPageState();
 }
 
 class _FoodOrderPageState extends State<FoodOrderPage> {
   int counter = 3;
+  int price = 0;
+  int cal_total = 0;
+  double average_calory = 0;
+
+  void calculate() async {
+    var sumPrice;
+    var sumDeposit;
+    var sumCal;
+    var sumAverage;
+    price = 0;
+    cal_total = 0;
+    average_calory = 0;
+    for (var i in CartFood) {
+      sumPrice = i.price * i.quantity;
+      sumCal = i.calories * i.quantity;
+      price = price + sumPrice;
+      cal_total = cal_total + sumCal;
+    }
+    average_calory = (cal_total / widget.people);
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    calculate();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,25 +86,131 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                CartItem(
-                    productName: "Menu: Pho",
-                    productPrice: "Price 299",
-                    productImage: "ic_popular_food_1",
-                    productCalory: "Calory: 500",
-                    productCartQuantity: "2"),
+                ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: CartFood.length,
+                  itemBuilder: (context, index) {
+                    MenusResponse result = CartFood[index];
+                    return CartItem(
+                      productId: result.id,
+                      productName: result.name,
+                      productPrice: "Price ${result.price}",
+                      productImage: result.image,
+                      productCalory: "Calory: ${result.calories}",
+                      productCartQuantity: result.quantity.toString(),
+                      funcDel: () {
+                        showDialog(
+                          context: context,
+                          builder: (ctx) => AlertDialog(
+                            title: Text(
+                              "Notification",
+                              textAlign: TextAlign.center,
+                            ),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Are you sure to delete '${result.name}' out of cart? ",
+                                ),
+                              ],
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(ctx).pop();
+                                },
+                                child: Text("Cancel"),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(ctx).pop();
+
+                                  setState(() {
+                                    CartFood.removeWhere(
+                                        (element) => element.id == result.id);
+                                  });
+                                },
+                                child: Text("Confirm"),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                      funcIncrease: () {
+                        for (var i = 0; i < CartFood.length; i++) {
+                          if (CartFood[i].id == result.id) {
+                            setState(() {
+                              CartFood[i].quantity++;
+                              calculate();
+                            });
+                            break;
+                          }
+                        }
+                      },
+                      funcDecrease: () {
+                        for (var i = 0; i < CartFood.length; i++) {
+                          if (CartFood[i].id == result.id) {
+                            if (CartFood[i].quantity == 1) {
+                              showDialog(
+                                context: context,
+                                builder: (ctx) => AlertDialog(
+                                  title: Text(
+                                    "Notification",
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Are you sure to delete '${result.name}' out of cart? ",
+                                      ),
+                                    ],
+                                  ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(ctx).pop();
+                                      },
+                                      child: Text("Cancel"),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(ctx).pop();
+                                        setState(() {
+                                          CartFood.removeAt(i);
+                                          calculate();
+                                        });
+                                      },
+                                      child: Text("Confirm"),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            } else {
+                              setState(() {
+                                CartFood[i].quantity--;
+                                calculate();
+                              });
+                            }
+                            break;
+                          }
+                        }
+                      },
+                    );
+                  },
+                ),
                 SizedBox(
                   height: 10,
                 ),
-                CartItem(
-                    productName: "Menu: Xoi",
-                    productPrice: "Price: 299",
-                    productImage: "ic_popular_food_4",
-                    productCalory: "Calory: 500",
-                    productCartQuantity: "5"),
-                SizedBox(
-                  height: 10,
+                TotalCalculationWidget(
+                  price,
+                  cal_total,
+                  average_calory,
                 ),
-                TotalCalculationWidget(),
                 SizedBox(
                   height: 10,
                 ),
@@ -104,8 +245,36 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                   width: 370,
                   text: "Confirm Order",
                   process: () async {
+                    List<FoodList> foodPriceMenu = [];
+                    for (MenusResponse i in CartFood) {
+                      var sum = i.price * i.quantity;
+                      foodPriceMenu.add(
+                        FoodList(
+                          foodname: i.name,
+                          totalPrice: sum,
+                          quantity: i.quantity,
+                        ),
+                      );
+                    }
+                    BookingDetailModel resultConfirm = BookingDetailModel(
+                        fullname: "",
+                        phone: "",
+                        tableName: widget.table,
+                        people: widget.people,
+                        dateBook: "",
+                        timeBook: "",
+                        foodList: foodPriceMenu,
+                        totalAllPrice: price,
+                        cal: cal_total,
+                        avgCal: average_calory);
                     Navigator.push(
-                        context, ScaleRoute(page: FoodOrderConfirm()));
+                      context,
+                      ScaleRoute(
+                        page: FoodOrderConfirm(
+                          orderFood: resultConfirm,
+                        ),
+                      ),
+                    );
                   },
                 ),
               ],
@@ -116,6 +285,15 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
 }
 
 class TotalCalculationWidget extends StatelessWidget {
+  int price;
+  int cal_total;
+  double average_cal;
+  TotalCalculationWidget(
+    this.price,
+    this.cal_total,
+    this.average_cal,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -157,35 +335,11 @@ class TotalCalculationWidget extends StatelessWidget {
                     textAlign: TextAlign.left,
                   ),
                   Text(
-                    "1,196 ฿",
+                    "${price} ฿",
                     style: TextStyle(
                         fontSize: 16,
                         color: Color(0xFF3a3a3b),
                         fontWeight: FontWeight.w600),
-                    textAlign: TextAlign.left,
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    "Deposit 70%",
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: Color(0xFF3a3a3b),
-                        fontWeight: FontWeight.w400),
-                    textAlign: TextAlign.left,
-                  ),
-                  Text(
-                    "837 ฿",
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: Color(0xFF3a3a3b),
-                        fontWeight: FontWeight.w400),
                     textAlign: TextAlign.left,
                   )
                 ],
@@ -205,7 +359,7 @@ class TotalCalculationWidget extends StatelessWidget {
                     textAlign: TextAlign.left,
                   ),
                   Text(
-                    "2000 kcal",
+                    "${cal_total} kcal",
                     style: TextStyle(
                         fontSize: 16,
                         color: Color(0xFF3a3a3b),
@@ -229,7 +383,7 @@ class TotalCalculationWidget extends StatelessWidget {
                     textAlign: TextAlign.left,
                   ),
                   Text(
-                    "667 kcal",
+                    "${average_cal} kcal",
                     style: TextStyle(
                         fontSize: 16,
                         color: Color(0xFF3a3a3b),
@@ -250,19 +404,27 @@ class TotalCalculationWidget extends StatelessWidget {
 }
 
 class CartItem extends StatelessWidget {
+  String productId;
   String productName;
   String productPrice;
   String productImage;
   String productCalory;
   String productCartQuantity;
+  Function() funcDel;
+  Function() funcIncrease;
+  Function() funcDecrease;
 
   CartItem({
     Key key,
+    @required this.productId,
     @required this.productName,
     @required this.productPrice,
     @required this.productImage,
     @required this.productCalory,
     @required this.productCartQuantity,
+    @required this.funcDel,
+    @required this.funcIncrease,
+    @required this.funcDecrease,
   }) : super(key: key);
 
   @override
@@ -295,8 +457,8 @@ class CartItem extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Center(
-                        child: Image.asset(
-                      "assets/images/popular_foods/$productImage.png",
+                        child: Image.network(
+                      productImage,
                       width: 110,
                       height: 100,
                     )),
@@ -356,12 +518,15 @@ class CartItem extends StatelessWidget {
                         SizedBox(
                           width: 40,
                         ),
-                        Container(
-                          alignment: Alignment.centerRight,
-                          child: Image.asset(
-                            "assets/images/menus/ic_delete.png",
-                            width: 25,
-                            height: 25,
+                        GestureDetector(
+                          onTap: funcDel,
+                          child: Container(
+                            alignment: Alignment.centerRight,
+                            child: Image.asset(
+                              "assets/images/menus/ic_delete.png",
+                              width: 25,
+                              height: 25,
+                            ),
                           ),
                         )
                       ],
@@ -369,7 +534,11 @@ class CartItem extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(left: 20),
                       alignment: Alignment.centerRight,
-                      child: AddToCartMenu(2),
+                      child: AddToCartMenu(
+                        int.parse(productCartQuantity),
+                        funcIncrease,
+                        funcDecrease,
+                      ),
                     )
                   ],
                 )
@@ -425,8 +594,14 @@ class CartIconWithBadge extends StatelessWidget {
 
 class AddToCartMenu extends StatelessWidget {
   int productCounter;
+  Function() add;
+  Function() remove;
 
-  AddToCartMenu(this.productCounter);
+  AddToCartMenu(
+    this.productCounter,
+    this.add,
+    this.remove,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -435,7 +610,7 @@ class AddToCartMenu extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           IconButton(
-            onPressed: () {},
+            onPressed: remove,
             icon: Icon(Icons.remove),
             color: Colors.black,
             iconSize: 18,
@@ -462,7 +637,7 @@ class AddToCartMenu extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: add,
             icon: Icon(Icons.add),
             color: Color(0xFFfd2c2c),
             iconSize: 18,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/common/button.dart';
-import 'package:flutter_app/widgets/BookingFoodWidget.dart';
+import 'package:flutter_app/widgets/MenuWidget.dart';
 import 'package:intl/intl.dart';
 import '../themes/constant.dart';
 
@@ -405,10 +405,10 @@ class _BookTableWidgetState extends State<BookTableWidget> {
                                   });
                                 } else {
                                   // รอ API
-                                  print(nameTable);
-                                  print(amount.text);
-                                  print(timeValue.text);
-                                  print("send");
+                                  // print(nameTable);
+                                  // print(amount.text);
+                                  // print(timeValue.text);
+                                  // print("send");
                                   return showDialog(
                                     context: context,
                                     builder: (ctx) => AlertDialog(
@@ -445,8 +445,12 @@ class _BookTableWidgetState extends State<BookTableWidget> {
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      BookingFoodWidget()),
+                                                builder: (context) =>
+                                                    MenuWidget(
+                                                  int.parse(amount.text),
+                                                  nameTable,
+                                                ),
+                                              ),
                                             );
                                           },
                                           child: Text("Confirm"),

@@ -18,6 +18,7 @@ class MenusResponse {
     this.image,
     this.name,
     this.price,
+    this.quantity,
   });
 
   String id;
@@ -25,6 +26,7 @@ class MenusResponse {
   String image;
   String name;
   int price;
+  int quantity;
 
   factory MenusResponse.fromJson(Map<String, dynamic> json) => MenusResponse(
         id: json["id"],
@@ -32,6 +34,7 @@ class MenusResponse {
         image: json["image"],
         name: json["name"],
         price: json["price"],
+        quantity: json["quantity"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -40,5 +43,6 @@ class MenusResponse {
         "image": image,
         "name": name,
         "price": price,
+        "quantity": quantity,
       };
 }
