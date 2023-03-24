@@ -128,6 +128,18 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "pluto_grid",
+      "rootUri": "file:///C:/Users/ASUS/AppData/Local/Pub/Cache/hosted/pub.dev/pluto_grid-6.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "rxdart",
+      "rootUri": "file:///C:/Users/ASUS/AppData/Local/Pub/Cache/hosted/pub.dev/rxdart-0.27.7",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///C:/src/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -212,7 +224,7 @@
       "languageVersion": "2.2"
     }
   ],
-  "generated": "2023-03-12T13:11:47.940736Z",
+  "generated": "2023-03-20T09:31:38.191813Z",
   "generator": "pub",
   "generatorVersion": "2.19.3"
 }

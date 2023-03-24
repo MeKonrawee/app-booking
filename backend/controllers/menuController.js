@@ -27,10 +27,10 @@ const getMenu = async (req, res, next) => {
       data.forEach((doc) => {
         const menu = new MenuResponse(
           doc.id,
+          doc.data().calories,
+          doc.data().image,
           doc.data().name,
-          doc.data().price,
-          doc.data().description,
-          doc.data().image
+          doc.data().price
         );
         menusArray.push(menu);
       });

@@ -48,32 +48,41 @@ class _TableAvailableState extends State<TableAvailable> {
                           );
                         }),
                     BookTableTiles(
-                      name: "Number 2",
-                      imageUrl: "table",
-                      func: () {
-                        setState(() {
+                        name: "Number 2",
+                        imageUrl: "table",
+                        func: () {
                           nameTable = "Number 2";
-                        });
-                      },
-                    ),
+                          Navigator.push(
+                            context,
+                            ScaleRoute(
+                              page: BookTable(nameTable),
+                            ),
+                          );
+                        }),
                     BookTableTiles(
-                      name: "Number 3",
-                      imageUrl: "untable",
-                      func: () {
-                        setState(() {
+                        name: "Number 3",
+                        imageUrl: "untable",
+                        func: () {
                           nameTable = "Number 3";
-                        });
-                      },
-                    ),
+                          Navigator.push(
+                            context,
+                            ScaleRoute(
+                              page: BookTable(nameTable),
+                            ),
+                          );
+                        }),
                     BookTableTiles(
-                      name: "Number 4",
-                      imageUrl: "table",
-                      func: () {
-                        setState(() {
+                        name: "Number 4",
+                        imageUrl: "table",
+                        func: () {
                           nameTable = "Number 4";
-                        });
-                      },
-                    ),
+                          Navigator.push(
+                            context,
+                            ScaleRoute(
+                              page: BookTable(nameTable),
+                            ),
+                          );
+                        }),
                   ],
                 ),
               ),

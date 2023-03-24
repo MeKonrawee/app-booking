@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/AccountCustomer.dart';
-import 'package:flutter_app/pages/BookTable.dart';
 import 'package:flutter_app/pages/CaloriesCount.dart';
+import 'package:flutter_app/pages/FoodHistory.dart';
 import 'package:flutter_app/pages/HomePage.dart';
 
 class MainScreen extends StatefulWidget {
@@ -17,6 +17,7 @@ class _MainScreenState extends State<MainScreen> {
   var screen = [
     HomePage(),
     CaloriesCount(),
+    History(),
     AccountCustomer(),
   ];
 
@@ -29,27 +30,56 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screen[currentIndex],
+      body:
+          // AdminPage(),
+          screen[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: 'Table',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.calculate_rounded),
-            label: 'Calory',
+            label: 'Menu',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'Account',
+            label: 'User',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Booking',
           ),
         ],
         currentIndex: currentIndex,
         selectedItemColor: Color(0xFFfd5352),
         onTap: _onItemTapped,
       ),
+
+      // User
+      // screen[currentIndex],
+      // bottomNavigationBar: BottomNavigationBar(
+      //   type: BottomNavigationBarType.fixed,
+      //   items: const <BottomNavigationBarItem>[
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.home),
+      //       label: 'Home',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.calculate_rounded),
+      //       label: 'Calory',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.person),
+      //       label: 'Account',
+      //     ),
+      //   ],
+      //   currentIndex: currentIndex,
+      //   selectedItemColor: Color(0xFFfd5352),
+      //   onTap: _onItemTapped,
+      // ),
     );
   }
 }

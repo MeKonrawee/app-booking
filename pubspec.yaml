@@ -29,6 +29,7 @@ dependencies:
   flutter_datetime_picker: ^1.5.1
   http: ^0.13.3
   webview_flutter: ^2.0.14
+  pluto_grid: ^6.0.4
 
 dev_dependencies:
   flutter_test:
