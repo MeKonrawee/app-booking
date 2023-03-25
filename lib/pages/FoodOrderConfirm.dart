@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/button.dart';
 import 'package:flutter_app/models/bookingDetail_Model.dart';
-import 'package:flutter_app/pages/AccountCustomer.dart';
-import 'package:flutter_app/pages/CaloriesCount.dart';
+import 'package:flutter_app/pages/FoodHistory.dart';
 
 import '../animation/ScaleRoute.dart';
 import '../themes/constant.dart';
@@ -250,30 +249,6 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 Text(
-                                  "Deposit 70%",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      color: Color(0xFF3a3a3b),
-                                      fontWeight: FontWeight.w400),
-                                  textAlign: TextAlign.left,
-                                ),
-                                Text(
-                                  "837 ฿",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      color: Color(0xFF3a3a3b),
-                                      fontWeight: FontWeight.w400),
-                                  textAlign: TextAlign.left,
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 7,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(
                                   "Calories Total",
                                   style: TextStyle(
                                       fontSize: 16,
@@ -326,9 +301,9 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
             ButtonKYP(
               height: 50,
               width: 370,
-              text: "Deposit Payment",
+              text: "Payment",
               process: () async {
-                Navigator.push(context, ScaleRoute(page: AccountCustomer()));
+                Navigator.push(context, ScaleRoute(page: History()));
               },
             ),
           ],

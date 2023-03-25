@@ -6,7 +6,8 @@ class BookingResponse {
     person_number,
     table_number,
     tel,
-    date
+    date,
+    quantity
   ) {
     this.id = id;
     this.food_menu = food_menu;
@@ -15,6 +16,7 @@ class BookingResponse {
     this.table_number = table_number;
     this.tel = tel;
     this.date = date;
+    this.quantity = quantity;
   }
 }
 

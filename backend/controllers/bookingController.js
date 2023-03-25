@@ -20,7 +20,8 @@ const getBooking = async (req, res, next) => {
           doc.data().person_number,
           doc.data().table_number,
           doc.data().tel,
-          doc.data().date
+          doc.data().date,
+          doc.data().quantity
         );
         tableArray.push(menu);
       });

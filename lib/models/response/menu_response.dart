@@ -29,13 +29,12 @@ class MenusResponse {
   int quantity;
 
   factory MenusResponse.fromJson(Map<String, dynamic> json) => MenusResponse(
-        id: json["id"],
-        calories: json["calories"],
-        image: json["image"],
-        name: json["name"],
-        price: json["price"],
-        quantity: json["quantity"],
-      );
+      id: json["id"],
+      calories: json["calories"],
+      image: json["image"],
+      name: json["name"],
+      price: json["price"],
+      quantity: json["quantity"]);
 
   Map<String, dynamic> toJson() => {
         "id": id,
