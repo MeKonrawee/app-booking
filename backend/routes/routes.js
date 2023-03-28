@@ -8,6 +8,7 @@ const {
   InsertMenuService: insertMenu,
   GetMenuService: getMenu,
 } = require("../controllers/menuController");
+const { GetTableService: getTable } = require("../controllers/tableController");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDoc = require("../swagger");
 
@@ -20,6 +21,7 @@ router.post("/login", Login);
 router.post("/menus", insertMenu);
 router.get("/menus", getMenu);
 router.get("/booking", getBooking);
+router.get("/tables", getTable);
 
 module.exports = {
   routes: router,
