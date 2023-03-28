@@ -6,7 +6,9 @@ class BookingResponse {
     person_number,
     table_number,
     tel,
-    date
+    date,
+    total_price,
+    average_calories
   ) {
     this.id = id;
     this.food_menu = food_menu;
@@ -15,6 +17,8 @@ class BookingResponse {
     this.table_number = table_number;
     this.tel = tel;
     this.date = date;
+    this.total_price = total_price;
+    this.average_calories = average_calories;
   }
 }
 
