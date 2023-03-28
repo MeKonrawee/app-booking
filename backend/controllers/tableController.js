@@ -39,7 +39,24 @@ const deleteTable = async (req, res, next) => {
   }
 };
 
+const addTable = async (req, res, next) => {
+  try {
+    const number = req.params.number;
+
+    const data = {
+      number: number,
+      status: true,
+    };
+    await firestore.collection("table").doc().set(data);
+    return res.status(200).json("Table added successfully");
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json("bad request");
+  }
+};
+
 module.exports = {
   GetTableService: getTable,
   DeleteTableService: deleteTable,
+  AddTableService: addTable,
 };
