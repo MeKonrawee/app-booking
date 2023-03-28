@@ -43,7 +43,19 @@ const getMenu = async (req, res, next) => {
   }
 };
 
+const deleteMenu = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    await firestore.collection("menus").doc(id).delete();
+    return res.status(200).json("Table deleted successfully");
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json("bad request");
+  }
+};
+
 module.exports = {
   InsertMenuService: insertMenu,
   GetMenuService: getMenu,
+  DeleteMenuService: deleteMenu,
 };
