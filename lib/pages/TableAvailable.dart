@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/models/response/table_response.dart';
+import 'package:flutter_app/services/table_services.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:intl/intl.dart';
 
 import '../animation/ScaleRoute.dart';
@@ -25,172 +28,88 @@ class _TableAvailableState extends State<TableAvailable> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          TableAvailableTitle(),
-          Column(
-            children: [
-              Container(
-                height: 100,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: <Widget>[
-                    BookTableTiles(
-                        name: "Number 1",
-                        imageUrl: "table",
-                        func: () {
-                          nameTable = "Number 1";
-                          Navigator.push(
-                            context,
-                            ScaleRoute(
-                              page: BookTable(nameTable),
-                            ),
-                          );
-                        }),
-                    BookTableTiles(
-                        name: "Number 2",
-                        imageUrl: "table",
-                        func: () {
-                          nameTable = "Number 2";
-                          Navigator.push(
-                            context,
-                            ScaleRoute(
-                              page: BookTable(nameTable),
-                            ),
-                          );
-                        }),
-                    BookTableTiles(
-                        name: "Number 3",
-                        imageUrl: "untable",
-                        func: () {
-                          nameTable = "Number 3";
-                          Navigator.push(
-                            context,
-                            ScaleRoute(
-                              page: BookTable(nameTable),
-                            ),
-                          );
-                        }),
-                    BookTableTiles(
-                        name: "Number 4",
-                        imageUrl: "table",
-                        func: () {
-                          nameTable = "Number 4";
-                          Navigator.push(
-                            context,
-                            ScaleRoute(
-                              page: BookTable(nameTable),
-                            ),
-                          );
-                        }),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          Container(
-            height: 100,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                BookTableTiles(
-                  name: "Number 5",
-                  imageUrl: "table",
-                  func: () {
-                    setState(() {
-                      nameTable = "Number 5";
-                    });
-                  },
-                ),
-                BookTableTiles(
-                  name: "Number 6",
-                  imageUrl: "untable",
-                  func: () {
-                    setState(() {
-                      nameTable = "Number 6";
-                    });
-                  },
-                ),
-                BookTableTiles(
-                  name: "Number 7",
-                  imageUrl: "table",
-                  func: () {
-                    setState(() {
-                      nameTable = "Number 7";
-                    });
-                  },
-                ),
-                BookTableTiles(
-                  name: "Number 8",
-                  imageUrl: "table",
-                  func: () {
-                    setState(() {
-                      nameTable = "Number 8";
-                    });
-                  },
-                ),
-              ],
+      child: Column(children: [
+        TableAvailableTitle(),
+        Column(
+          children: [
+            FutureBuilder<List<TableResponse>>(
+              future: TablesService.getTables(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  List<TableResponse> carouselCard = snapshot.data;
+                  return Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: MasonryGridView.builder(
+                      shrinkWrap: true,
+                      gridDelegate:
+                          SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 4,
+                      ),
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 20,
+                      itemCount: carouselCard.length,
+                      itemBuilder: (context, index) {
+                        return BookTableTiles(
+                          name: carouselCard[index].number,
+                          status: carouselCard[index].status,
+                          func: () {
+                            nameTable = carouselCard[index].number;
+                            Navigator.push(
+                              context,
+                              ScaleRoute(
+                                page: BookTable(nameTable),
+                              ),
+                            );
+                          },
+                        );
+                        // BoxItemFood(
+                        //   dataMenu: carouselCard[index],
+                        //   func: () {
+                        //     setState(() {
+                        //       var duplicate = CartFood.firstWhere(
+                        //         (element) =>
+                        //             element.name == carouselCard[index].name,
+                        //         orElse: () => null,
+                        //       );
+                        //       if (duplicate == null) {
+                        //         CartFood.add(
+                        //           FoodMenu(
+                        //             name: carouselCard[index].name,
+                        //             cal: carouselCard[index].calories,
+                        //             price: carouselCard[index].price,
+                        //             quantity: 1,
+                        //           ),
+                        //         );
+                        //       } else {
+                        //         duplicate.quantity++;
+                        //       }
+                        //     });
+                        //   },
+                        // );
+                      },
+                    ),
+                  );
+                } else {
+                  return Container();
+                }
+              },
             ),
-          ),
-          Container(
-            height: 100,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                BookTableTiles(
-                  name: "Number 9",
-                  imageUrl: "untable",
-                  func: () {
-                    setState(() {
-                      nameTable = "Number 9";
-                    });
-                  },
-                ),
-                BookTableTiles(
-                  name: "Number 10",
-                  imageUrl: "table",
-                  func: () {
-                    setState(() {
-                      nameTable = "Number 10";
-                    });
-                  },
-                ),
-                BookTableTiles(
-                  name: "Number 11",
-                  imageUrl: "table",
-                  func: () {
-                    setState(() {
-                      nameTable = "Number 11";
-                    });
-                  },
-                ),
-                BookTableTiles(
-                  name: "Number 12",
-                  imageUrl: "table",
-                  func: () {
-                    setState(() {
-                      nameTable = "Number 12";
-                    });
-                  },
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+          ],
+        ),
+      ]),
     );
   }
 }
 
 class BookTableTiles extends StatelessWidget {
   String name;
-  String imageUrl;
+  bool status;
   Function() func;
 
   BookTableTiles({
     Key key,
     @required this.name,
-    @required this.imageUrl,
+    @required this.status,
     @required this.func,
   }) : super(key: key);
 
@@ -223,7 +142,9 @@ class BookTableTiles extends StatelessWidget {
                   height: 60,
                   child: Center(
                       child: Image.asset(
-                    'assets/images/Table/' + imageUrl + ".png",
+                    status
+                        ? 'assets/images/Table/table.png'
+                        : 'assets/images/Table/untable.png',
                     width: 50,
                     height: 50,
                   )),

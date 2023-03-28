@@ -13,6 +13,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int currentIndex = 0;
+  String mtoken = " ";
 
   var screen = [
     HomePage(),
@@ -25,6 +26,11 @@ class _MainScreenState extends State<MainScreen> {
     setState(() {
       currentIndex = index;
     });
+  }
+
+  @override
+  initState() {
+    super.initState();
   }
 
   @override

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/animation/ScaleRoute.dart';
 import 'package:flutter_app/controllers/cartList.dart';
+import 'package:flutter_app/models/response/booking_response.dart';
 import 'package:flutter_app/models/response/menu_response.dart';
 import 'package:flutter_app/pages/FoodOrderPage.dart';
 import 'package:flutter_app/services/menu_services.dart';
@@ -58,13 +59,19 @@ class _MenuWidgetState extends State<MenuWidget> {
                     dataMenu: carouselCard[index],
                     func: () {
                       setState(() {
-                        carouselCard[index].quantity++;
                         var duplicate = CartFood.firstWhere(
-                          (element) => element.id == carouselCard[index].id,
+                          (element) => element.name == carouselCard[index].name,
                           orElse: () => null,
                         );
                         if (duplicate == null) {
-                          CartFood.add(carouselCard[index]);
+                          CartFood.add(
+                            FoodMenu(
+                              name: carouselCard[index].name,
+                              cal: carouselCard[index].calories,
+                              price: carouselCard[index].price,
+                              quantity: 1,
+                            ),
+                          );
                         } else {
                           duplicate.quantity++;
                         }
@@ -91,7 +98,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                   await Navigator.push(
                     context,
                     ScaleRoute(
-                      page: FoodOrderPage(widget.people,widget.table),
+                      page: FoodOrderPage(widget.people, widget.table),
                     ),
                   );
                   setState(() {});

@@ -1,36 +1,31 @@
-// To parse this JSON data, do
-//
-//     final menusResponse = menusResponseFromJson(jsonString);
-
 import 'dart:convert';
 
-List<TableResponse> tableResponseFromJson(String str) =>
-    List<TableResponse>.from(
-        json.decode(str).map((x) => TableResponse.fromJson(x)));
+import 'package:flutter/material.dart';
 
-String tableResponseToJson(List<TableResponse> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+List<TableResponse> tableResponseFromJson(String str) => List<TableResponse>.from(json.decode(str).map((x) => TableResponse.fromJson(x)));
+
+String tableResponseToJson(List<TableResponse> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class TableResponse {
-  TableResponse({
-    this.id,
-    this.number,
-    this.status,
-  });
+    TableResponse({
+        @required this.id,
+        @required this.number,
+        @required this.status,
+    });
 
-  String id;
-  int number;
-  String status;
+    String id;
+    String number;
+    bool status;
 
-  factory TableResponse.fromJson(Map<String, dynamic> json) => TableResponse(
+    factory TableResponse.fromJson(Map<String, dynamic> json) => TableResponse(
         id: json["id"],
-        number: json["calories"],
-        status: json["image"],
-      );
+        number: json["number"],
+        status: json["status"],
+    );
 
-  Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "id": id,
         "number": number,
         "status": status,
-      };
+    };
 }

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/controllers/cartList.dart';
 import 'package:flutter_app/models/bookingDetail_Model.dart';
+import 'package:flutter_app/models/response/booking_response.dart';
 import 'package:flutter_app/models/response/menu_response.dart';
 import 'package:flutter_app/pages/FoodOrderConfirm.dart';
 
@@ -34,7 +35,7 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
     average_calory = 0;
     for (var i in CartFood) {
       sumPrice = i.price * i.quantity;
-      sumCal = i.calories * i.quantity;
+      sumCal = i.cal * i.quantity;
       price = price + sumPrice;
       cal_total = cal_total + sumCal;
     }
@@ -91,13 +92,11 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                   shrinkWrap: true,
                   itemCount: CartFood.length,
                   itemBuilder: (context, index) {
-                    MenusResponse result = CartFood[index];
+                    FoodMenu result = CartFood[index];
                     return CartItem(
-                      productId: result.id,
                       productName: result.name,
                       productPrice: "Price ${result.price}",
-                      productImage: result.image,
-                      productCalory: "Calory: ${result.calories}",
+                      productCalory: "Calory: ${result.cal}",
                       productCartQuantity: result.quantity.toString(),
                       funcDel: () {
                         showDialog(
@@ -128,8 +127,9 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                                   Navigator.of(ctx).pop();
 
                                   setState(() {
-                                    CartFood.removeWhere(
-                                        (element) => element.id == result.id);
+                                    CartFood.removeWhere((element) =>
+                                        element.name == result.name);
+                                    calculate();
                                   });
                                 },
                                 child: Text("Confirm"),
@@ -140,7 +140,7 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                       },
                       funcIncrease: () {
                         for (var i = 0; i < CartFood.length; i++) {
-                          if (CartFood[i].id == result.id) {
+                          if (CartFood[i].name == result.name) {
                             setState(() {
                               CartFood[i].quantity++;
                               calculate();
@@ -151,7 +151,7 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                       },
                       funcDecrease: () {
                         for (var i = 0; i < CartFood.length; i++) {
-                          if (CartFood[i].id == result.id) {
+                          if (CartFood[i].name == result.name) {
                             if (CartFood[i].quantity == 1) {
                               showDialog(
                                 context: context,
@@ -246,7 +246,7 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                   text: "Confirm Order",
                   process: () async {
                     List<FoodList> foodPriceMenu = [];
-                    for (MenusResponse i in CartFood) {
+                    for (FoodMenu i in CartFood) {
                       var sum = i.price * i.quantity;
                       foodPriceMenu.add(
                         FoodList(
@@ -404,10 +404,8 @@ class TotalCalculationWidget extends StatelessWidget {
 }
 
 class CartItem extends StatelessWidget {
-  String productId;
   String productName;
   String productPrice;
-  String productImage;
   String productCalory;
   String productCartQuantity;
   Function() funcDel;
@@ -416,10 +414,8 @@ class CartItem extends StatelessWidget {
 
   CartItem({
     Key key,
-    @required this.productId,
     @required this.productName,
     @required this.productPrice,
-    @required this.productImage,
     @required this.productCalory,
     @required this.productCartQuantity,
     @required this.funcDel,
@@ -450,97 +446,81 @@ class CartItem extends StatelessWidget {
           child: Container(
             alignment: Alignment.center,
             padding: EdgeInsets.only(left: 5, right: 5, top: 10, bottom: 10),
-            child: Row(
+            child: Column(
               mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Container(
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Center(
-                        child: Image.network(
-                      productImage,
-                      width: 110,
-                      height: 100,
-                    )),
-                  ),
+                SizedBox(
+                  height: 5,
                 ),
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Container(
-                              child: Text(
-                                "$productName",
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Color(0xFF3a3a3b),
-                                    fontWeight: FontWeight.w400),
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Container(
-                              child: Text(
-                                "$productPrice",
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Color(0xFF3a3a3b),
-                                    fontWeight: FontWeight.w400),
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Container(
-                              child: Text(
-                                "$productCalory",
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Color(0xFF3a3a3b),
-                                    fontWeight: FontWeight.w400),
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
-                          ],
+                        Container(
+                          child: Text(
+                            "$productName",
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Color(0xFF3a3a3b),
+                                fontWeight: FontWeight.w400),
+                            textAlign: TextAlign.left,
+                          ),
                         ),
                         SizedBox(
-                          width: 40,
+                          height: 5,
                         ),
-                        GestureDetector(
-                          onTap: funcDel,
-                          child: Container(
-                            alignment: Alignment.centerRight,
-                            child: Image.asset(
-                              "assets/images/menus/ic_delete.png",
-                              width: 25,
-                              height: 25,
-                            ),
+                        Container(
+                          child: Text(
+                            "$productPrice",
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Color(0xFF3a3a3b),
+                                fontWeight: FontWeight.w400),
+                            textAlign: TextAlign.left,
                           ),
-                        )
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          child: Text(
+                            "$productCalory",
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Color(0xFF3a3a3b),
+                                fontWeight: FontWeight.w400),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
                       ],
                     ),
-                    Container(
-                      margin: EdgeInsets.only(left: 20),
-                      alignment: Alignment.centerRight,
-                      child: AddToCartMenu(
-                        int.parse(productCartQuantity),
-                        funcIncrease,
-                        funcDecrease,
+                    SizedBox(
+                      width: 40,
+                    ),
+                    GestureDetector(
+                      onTap: funcDel,
+                      child: Container(
+                        alignment: Alignment.centerRight,
+                        child: Image.asset(
+                          "assets/images/menus/ic_delete.png",
+                          width: 25,
+                          height: 25,
+                        ),
                       ),
                     )
                   ],
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 20),
+                  alignment: Alignment.centerRight,
+                  child: AddToCartMenu(
+                    int.parse(productCartQuantity),
+                    funcIncrease,
+                    funcDecrease,
+                  ),
                 )
               ],
             ),

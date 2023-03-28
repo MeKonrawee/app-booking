@@ -1,56 +1,90 @@
 // To parse this JSON data, do
 //
-//     final menusResponse = menusResponseFromJson(jsonString);
+//     final bookingModel = bookingModelFromJson(jsonString);
 
 import 'dart:convert';
 
-List<BookingResponse> bookingResponseFromJson(String str) =>
-    List<BookingResponse>.from(
-        json.decode(str).map((x) => BookingResponse.fromJson(x)));
+import 'package:flutter/material.dart';
 
-String bookingResponseToJson(List<BookingResponse> data) =>
+List<BookingModel> bookingModelFromJson(String str) => List<BookingModel>.from(
+    json.decode(str).map((x) => BookingModel.fromJson(x)));
+
+String bookingModelToJson(List<BookingModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class BookingResponse {
-  BookingResponse(
-      {this.id,
-      this.food_menu,
-      this.full_name,
-      this.person_number,
-      this.table_number,
-      this.tel,
-      this.date,
-      this.quantity});
+class BookingModel {
+  BookingModel({
+    @required this.id,
+    @required this.foodMenu,
+    @required this.fullName,
+    @required this.personNumber,
+    @required this.tableNumber,
+    @required this.tel,
+    @required this.date,
+    @required this.totalPrice,
+    @required this.averageCalories,
+  });
 
   String id;
-  String food_menu;
-  String full_name;
-  String person_number;
-  String table_number;
+  List<FoodMenu> foodMenu;
+  String fullName;
+  String personNumber;
+  String tableNumber;
   String tel;
   String date;
-  int quantity;
+  double totalPrice;
+  int averageCalories;
 
-  factory BookingResponse.fromJson(Map<String, dynamic> json) =>
-      BookingResponse(
+  factory BookingModel.fromJson(Map<String, dynamic> json) => BookingModel(
         id: json["id"],
-        food_menu: json["food_menu"],
-        full_name: json["full_name"],
-        person_number: json["person_number"],
-        table_number: json["table_number"],
+        foodMenu: List<FoodMenu>.from(
+            json["food_menu"].map((x) => FoodMenu.fromJson(x))),
+        fullName: json["full_name"],
+        personNumber: json["person_number"],
+        tableNumber: json["table_number"],
         tel: json["tel"],
         date: json["date"],
-        quantity: json["quantity"],
+        totalPrice: json["total_price"]?.toDouble(),
+        averageCalories: json["average_calories"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "food_menu": food_menu,
-        "full_name": full_name,
-        "person_number": person_number,
-        "table_number": table_number,
+        "food_menu": List<dynamic>.from(foodMenu.map((x) => x.toJson())),
+        "full_name": fullName,
+        "person_number": personNumber,
+        "table_number": tableNumber,
         "tel": tel,
         "date": date,
+        "total_price": totalPrice,
+        "average_calories": averageCalories,
+      };
+}
+
+class FoodMenu {
+  FoodMenu({
+    @required this.name,
+    @required this.price,
+    @required this.cal,
+    @required this.quantity,
+  });
+
+  String name;
+  int price;
+  int cal;
+  int quantity;
+
+  factory FoodMenu.fromJson(Map<String, dynamic> json) => FoodMenu(
+        name: json["name"],
+        price: json["price"],
+        cal: json["cal"],
+        quantity: json["quantity"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "price": price,
+        "cal": cal,
         "quantity": quantity,
       };
 }
