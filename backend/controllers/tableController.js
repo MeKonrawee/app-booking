@@ -28,6 +28,18 @@ const getTable = async (req, res, next) => {
   }
 };
 
+const deleteTable = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    await firestore.collection("table").doc(id).delete();
+    return res.status(200).json("Table deleted successfully");
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json("bad request");
+  }
+};
+
 module.exports = {
   GetTableService: getTable,
+  DeleteTableService: deleteTable,
 };
