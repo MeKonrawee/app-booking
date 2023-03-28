@@ -20,7 +20,9 @@ const getBooking = async (req, res, next) => {
           doc.data().person_number,
           doc.data().table_number,
           doc.data().tel,
-          doc.data().date
+          doc.data().date,
+          doc.data().total_price,
+          doc.data().average_calories
         );
         tableArray.push(menu);
       });
