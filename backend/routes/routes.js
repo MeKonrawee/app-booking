@@ -9,6 +9,7 @@ const {
   InsertMenuService: insertMenu,
   GetMenuService: getMenu,
   DeleteMenuService: deleteMenu,
+  FindMenuService: findMenu,
 } = require("../controllers/menuController");
 const {
   GetTableService: getTable,
@@ -27,6 +28,7 @@ router.post("/login", Login);
 router.post("/menus", insertMenu);
 router.get("/menus", getMenu);
 router.get("/menus/delete/:id", deleteMenu);
+router.get("/menus/find/:id", findMenu);
 router.get("/booking", getBooking);
 router.post("/booking", insertBooking);
 router.get("/tables", getTable);

@@ -54,8 +54,25 @@ const deleteMenu = async (req, res, next) => {
   }
 };
 
+const findMenu = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const menu = await firestore.collection("menus").doc(id);
+    const data = await menu.get();
+    if (!data.exists) {
+      return res.status(404).json("Menu not found");
+    } else {
+      return res.status(200).json(data.data());
+    }
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json("bad request");
+  }
+};
+
 module.exports = {
   InsertMenuService: insertMenu,
   GetMenuService: getMenu,
   DeleteMenuService: deleteMenu,
+  FindMenuService: findMenu,
 };
