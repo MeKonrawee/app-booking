@@ -15,7 +15,7 @@ const {
 } = require("../controllers/menuController");
 const {
   GetTableService: getTable,
-  updateTableService: updateTable,
+  UpdateTableService: updateTable,
   DeleteTableService: deleteTable,
   AddTableService: addTable,
 } = require("../controllers/tableController");
