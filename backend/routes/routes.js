@@ -37,7 +37,7 @@ router.post("/booking", insertBooking);
 router.get("/tables", getTable);
 router.get("/tables/delete/:id", deleteTable);
 router.get("/tables/add/:number", addTable);
-router.get("/history/:id", getHistory);
+router.get("/history/:name", getHistory);
 
 module.exports = {
   routes: router,

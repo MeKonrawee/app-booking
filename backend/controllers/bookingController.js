@@ -60,8 +60,10 @@ const insertBooking = async (req, res, next) => {
 
 const getHistory = async (req, res, next) => {
   try {
-    const id = req.params.id;
-    const menus = await firestore.collection("booking").doc(id);
+    const name = req.params.name;
+    const menus = await firestore
+      .collection("booking")
+      .where("full_name", "==", name);
     const data = await menus.get();
     if (data.empty) {
       return res.status(404).json("No table found");
