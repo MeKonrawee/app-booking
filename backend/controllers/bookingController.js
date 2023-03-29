@@ -38,6 +38,20 @@ const insertBooking = async (req, res, next) => {
   try {
     const data = req.body;
     await firestore.collection("booking").doc().set(data);
+
+    const checkTable = await firestore
+      .collection("table")
+      .where("number", "==", data.table_number)
+      .get();
+    if (checkTable.empty) {
+      return res.status(404).json("No table found");
+    }
+    checkTable.forEach((doc) => {
+      firestore.collection("table").doc(doc.id).update({
+        status: false,
+      });
+    });
+    return res.status(200).json("Success!");
   } catch (err) {
     console.error(err);
     return res.status(400).json("bad request");
