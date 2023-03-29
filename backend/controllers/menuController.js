@@ -70,8 +70,22 @@ const findMenu = async (req, res, next) => {
   }
 };
 
+const updateMenu = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const data = req.body;
+    const menu = await firestore.collection("menus").doc(id);
+    await menu.update(data);
+    return res.status(200).json("Menu updated successfully");
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json("bad request");
+  }
+};
+
 module.exports = {
   InsertMenuService: insertMenu,
+  UpdateMenuService: updateMenu,
   GetMenuService: getMenu,
   DeleteMenuService: deleteMenu,
   FindMenuService: findMenu,

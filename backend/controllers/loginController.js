@@ -21,31 +21,19 @@ const Login = async (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    const test = await firestore
+    const login = await firestore
       .collection("account")
       .where("username", "==", username)
       .where("password", "==", password);
-    const check = await test.get();
+    const check = await login.get();
     if (check.empty) {
       return res.status(200).json(false);
     }
 
-    return res.status(200).json(
-      check.docs.map((doc) => {
-        return {
-          id: doc.id,
-          birthday: doc.data().Birthday,
-          calories: doc.data().calories,
-          email: doc.data().email,
-          full_name: doc.data().fullname,
-          height: doc.data().height,
-          phone_number: doc.data().phonenumber,
-          sex: doc.data().sex,
-          username: doc.data().username,
-          weight: doc.data().weight,
-        };
-      })
-    );
+    const response = check.docs.map((doc) => {
+      return doc.data();
+    });
+    return res.status(200).json(response);
   } catch (err) {
     console.error(err);
     return res.status(400).json("bad request");
