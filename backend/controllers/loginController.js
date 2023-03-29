@@ -33,7 +33,7 @@ const Login = async (req, res, next) => {
     const response = check.docs.map((doc) => {
       return doc.data();
     });
-    return res.status(200).json(response);
+    return res.status(200).json(response[0]);
   } catch (err) {
     console.error(err);
     return res.status(400).json("bad request");
