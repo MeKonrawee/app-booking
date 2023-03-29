@@ -58,7 +58,35 @@ const insertBooking = async (req, res, next) => {
   }
 };
 
+const getHistory = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const menus = await firestore.collection("booking").doc(id);
+    const data = await menus.get();
+    if (data.empty) {
+      return res.status(404).json("No table found");
+    } else {
+      const menu = new BookingResponse(
+        data.id,
+        data.data().food_menu,
+        data.data().full_name,
+        data.data().person_number,
+        data.data().table_number,
+        data.data().tel,
+        data.data().date,
+        data.data().total_price,
+        data.data().average_calories
+      );
+      return res.status(200).json(menu);
+    }
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json("bad request");
+  }
+};
+
 module.exports = {
   BookingService: getBooking,
   InsertBookingService: insertBooking,
+  HistoryBookingService: getHistory,
 };
