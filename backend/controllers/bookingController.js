@@ -34,6 +34,17 @@ const getBooking = async (req, res, next) => {
   }
 };
 
+const insertBooking = async (req, res, next) => {
+  try {
+    const data = req.body;
+    await firestore.collection("booking").doc().set(data);
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json("bad request");
+  }
+};
+
 module.exports = {
   BookingService: getBooking,
+  InsertBookingService: insertBooking,
 };

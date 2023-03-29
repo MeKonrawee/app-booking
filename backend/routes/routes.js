@@ -3,6 +3,7 @@ const { RegisterService: Register } = require("../controllers/loginController");
 const { LoginService: Login } = require("../controllers/loginController");
 const {
   BookingService: getBooking,
+  InsertBookingService: insertBooking,
 } = require("../controllers/bookingController");
 const {
   InsertMenuService: insertMenu,
@@ -27,6 +28,7 @@ router.post("/menus", insertMenu);
 router.get("/menus", getMenu);
 router.get("/menus/delete/:id", deleteMenu);
 router.get("/booking", getBooking);
+router.post("/booking", insertBooking);
 router.get("/tables", getTable);
 router.get("/tables/delete/:id", deleteTable);
 router.get("/tables/add/:number", addTable);
