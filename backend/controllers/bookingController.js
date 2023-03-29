@@ -68,18 +68,21 @@ const getHistory = async (req, res, next) => {
     if (data.empty) {
       return res.status(404).json("No table found");
     } else {
-      const menu = new BookingResponse(
-        doc.id,
-        doc.data().food_menu,
-        doc.data().full_name,
-        doc.data().person_number,
-        doc.data().table_number,
-        doc.data().tel,
-        doc.data().date,
-        doc.data().total_price,
-        doc.data().average_calories
+      return res.status(200).json(
+        data.docs.map((doc) => {
+          return {
+            id: doc.id,
+            food_menu: doc.data().food_menu,
+            full_name: doc.data().full_name,
+            person_number: doc.data().person_number,
+            table_number: doc.data().table_number,
+            tel: doc.data().tel,
+            date: doc.data().date,
+            total_price: doc.data().total_price,
+            average_calories: doc.data().average_calories,
+          };
+        })[0]
       );
-      return res.status(200).json(menu);
     }
   } catch (err) {
     console.error(err);
