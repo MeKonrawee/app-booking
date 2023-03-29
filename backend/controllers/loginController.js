@@ -30,7 +30,22 @@ const Login = async (req, res, next) => {
       return res.status(200).json(false);
     }
 
-    return res.status(200).json(true);
+    return res.status(200).json(
+      check.docs.map((doc) => {
+        return {
+          id: doc.id,
+          birthday: doc.data().Birthday,
+          calories: doc.data().calories,
+          email: doc.data().email,
+          full_name: doc.data().fullname,
+          height: doc.data().height,
+          phone_number: doc.data().phonenumber,
+          sex: doc.data().sex,
+          username: doc.data().username,
+          weight: doc.data().weight,
+        };
+      })
+    );
   } catch (err) {
     console.error(err);
     return res.status(400).json("bad request");
