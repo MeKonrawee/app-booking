@@ -15,6 +15,7 @@ const {
 } = require("../controllers/menuController");
 const {
   GetTableService: getTable,
+  updateTableService: updateTable,
   DeleteTableService: deleteTable,
   AddTableService: addTable,
 } = require("../controllers/tableController");
@@ -38,6 +39,7 @@ router.get("/menus/find/:id", findMenu);
 router.get("/booking", getBooking);
 router.post("/booking", insertBooking);
 router.get("/tables", getTable);
+router.get("/tables/:number", updateTable);
 router.get("/tables/delete/:id", deleteTable);
 router.get("/tables/add/:number", addTable);
 router.get("/history/:name", getHistory);
