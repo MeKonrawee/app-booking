@@ -21,16 +21,19 @@ const Login = async (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    const test = await firestore
+    const login = await firestore
       .collection("account")
       .where("username", "==", username)
       .where("password", "==", password);
-    const check = await test.get();
+    const check = await login.get();
     if (check.empty) {
       return res.status(200).json(false);
     }
 
-    return res.status(200).json(true);
+    const response = check.docs.map((doc) => {
+      return doc.data();
+    });
+    return res.status(200).json(response[0]);
   } catch (err) {
     console.error(err);
     return res.status(400).json("bad request");
