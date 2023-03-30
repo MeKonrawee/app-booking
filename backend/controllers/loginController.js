@@ -6,7 +6,17 @@ const firestore = firebase.firestore();
 const Register = async (req, res, next) => {
   try {
     const data = req.body;
-    console.log(data);
+    const bmi =
+      Number(data.weight) /
+      ((Number(data.height) / 100) * (Number(data.height) / 100));
+    data.bmi = bmi.toFixed(2);
+    if (data.sex === "Female") {
+      const bmr = 655 + 9.6 * data.weight + 1.8 * data.height - 4.7 * data.age;
+      data.bmr = bmr.toFixed(2);
+    } else {
+      const bmr = 66 + 13.7 * data.weight + 5 * data.height - 6.8 * data.age;
+      data.bmr = bmr.toFixed(2);
+    }
     await firestore.collection("account").doc().set(data);
 
     return res.status(201).json("Success!");
