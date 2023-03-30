@@ -26,14 +26,14 @@ class _SignInPageState extends State<SignInPage> {
   void session() async {
     var checkSession = await SessionManager().get("user");
     if (checkSession != null) {
+      user = await AccountModel.fromJson(
+        await SessionManager().get("user"),
+      );
       Navigator.pushReplacement(
         context,
         ScaleRoute(
           page: MainScreen(),
         ),
-      );
-      user = AccountModel.fromJson(
-        await SessionManager().get("user"),
       );
     }
     // await SessionManager().remove("user");
@@ -163,6 +163,7 @@ class _SignInPageState extends State<SignInPage> {
                           .then((check) async {
                         if (check != false) {
                           await sessionManager.set("user", check);
+                          user = check;
                           Navigator.pushReplacement(
                             context,
                             ScaleRoute(

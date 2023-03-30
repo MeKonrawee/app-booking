@@ -64,4 +64,36 @@ class Accountservices {
       return false;
     }
   }
+
+  static Future<dynamic> updateAccount(
+    AccountModel resultSend,
+  ) async {
+    try {
+      final String url = host + "/api/account/${resultSend.fullname}";
+      var result = await http.post(
+        Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(
+          <String, dynamic>{
+            "Birthday": resultSend.birthday,
+            "email": resultSend.email,
+            "fullname": resultSend.fullname,
+            "height": resultSend.height,
+            "password": resultSend.password,
+            "phonenumber": resultSend.phonenumber,
+            "sex": resultSend.sex,
+            "username": resultSend.username,
+            "weight": resultSend.weight,
+          },
+        ),
+      );
+
+      AccountModel resultAccount = accountModelFromJson(result.body);
+      return resultAccount;
+    } catch (e) {
+      return false;
+    }
+  }
 }

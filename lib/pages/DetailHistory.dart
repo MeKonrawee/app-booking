@@ -2,18 +2,42 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_app/models/response/history_response.dart';
 import 'package:flutter_app/themes/constant.dart';
 
 class DetailHistory extends StatefulWidget {
-  const DetailHistory({Key key}) : super(key: key);
+  HistoryModel detail;
+  DetailHistory({Key key, this.detail}) : super(key: key);
 
   @override
   State<DetailHistory> createState() => _DetailHistoryState();
 }
 
 class _DetailHistoryState extends State<DetailHistory> {
+  String time;
+  String date;
+  int cal_total = 0;
+
+  void cal() async {
+    cal_total = 0;
+    for (var i in widget.detail.foodMenu) {
+      int sum = i.cal * i.quantity;
+      cal_total = cal_total + sum;
+    }
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    cal();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    var split = widget.detail.date.split(" ");
+    time = split[1];
+    date = split[0];
     return Scaffold(
       backgroundColor: Color(0xFFfae3e2),
       appBar: AppBar(
@@ -47,7 +71,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Name : ",
+                        "Name : ${widget.detail.fullName}",
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,
@@ -58,7 +82,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                         height: 7,
                       ),
                       Text(
-                        "Phone : ",
+                        "Phone : ${widget.detail.tel}",
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,
@@ -69,7 +93,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                         height: 7,
                       ),
                       Text(
-                        "Table Number : ",
+                        "Table Number : ${widget.detail.tableNumber}",
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,
@@ -80,7 +104,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                         height: 7,
                       ),
                       Text(
-                        "Person Number : ",
+                        "Person Number : ${widget.detail.personNumber}",
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,
@@ -91,7 +115,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                         height: 7,
                       ),
                       Text(
-                        "Time : ",
+                        "Time : ${time}",
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,
@@ -102,7 +126,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                         height: 7,
                       ),
                       Text(
-                        "Booking date : ",
+                        "Booking date : ${date}",
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,
@@ -167,50 +191,33 @@ class _DetailHistoryState extends State<DetailHistory> {
                             SizedBox(
                               height: 5,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(
-                                  "Pho x2",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Color(0xFF3a3a3b),
-                                  ),
-                                  textAlign: TextAlign.left,
-                                ),
-                                Text(
-                                  "528 ฿",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Color(0xFF3a3a3b),
-                                  ),
-                                  textAlign: TextAlign.left,
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 7,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(
-                                  "Xoi x2",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Color(0xFF3a3a3b),
-                                  ),
-                                  textAlign: TextAlign.left,
-                                ),
-                                Text(
-                                  "399 ฿",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Color(0xFF3a3a3b),
-                                  ),
-                                  textAlign: TextAlign.left,
-                                )
-                              ],
+                            ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: widget.detail.foodMenu.length,
+                              itemBuilder: (context, index) {
+                                return Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text(
+                                      "${widget.detail.foodMenu[index].name} x${widget.detail.foodMenu[index].quantity}",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: Color(0xFF3a3a3b),
+                                      ),
+                                      textAlign: TextAlign.left,
+                                    ),
+                                    Text(
+                                      "${widget.detail.foodMenu[index].price} ฿",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: Color(0xFF3a3a3b),
+                                      ),
+                                      textAlign: TextAlign.left,
+                                    )
+                                  ],
+                                );
+                              },
                             ),
                             SizedBox(
                               height: 7,
@@ -227,7 +234,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                                   textAlign: TextAlign.left,
                                 ),
                                 Text(
-                                  "1,196 ฿",
+                                  "${widget.detail.totalPrice} ฿",
                                   style: TextStyle(
                                     fontSize: 16,
                                     color: Color(0xFF3a3a3b),
@@ -251,7 +258,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                                   textAlign: TextAlign.left,
                                 ),
                                 Text(
-                                  "2000 kcal",
+                                  "${cal_total.toString()} kcal",
                                   style: TextStyle(
                                       fontSize: 16,
                                       color: Color(0xFF3a3a3b),
@@ -275,7 +282,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                                   textAlign: TextAlign.left,
                                 ),
                                 Text(
-                                  "667 kcal",
+                                  "${widget.detail.averageCalories} kcal",
                                   style: TextStyle(
                                       fontSize: 16,
                                       color: Color(0xFF3a3a3b),

@@ -1,4 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_app/controllers/userInfo.dart';
+import 'package:flutter_app/models/response/menu_response.dart';
+import 'package:flutter_app/services/history_services.dart';
+import 'package:flutter_app/services/menu_services.dart';
 import 'package:flutter_app/themes/constant.dart';
 
 class CaloriesCount extends StatefulWidget {
@@ -16,6 +22,21 @@ List<String> eventSelect = [
 
 class _CaloriesCountState extends State<CaloriesCount> {
   String currentEvent = "";
+  double tdee = 0;
+  List resultHistory = [];
+
+  @override
+  void initState() {
+    getHistory();
+    super.initState();
+  }
+
+  void getHistory() async {
+    resultHistory = await HistoryService.getMenu(user.fullname);
+    resultHistory.sort((a, b) => a.date.compareTo(b.date));
+
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,10 +114,11 @@ class _CaloriesCountState extends State<CaloriesCount> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             BoxShowCalories(
-                                title: "Body Mass Index (BMI)", value: "19.5"),
+                                title: "Body Mass Index (BMI)",
+                                value: "${user.bmi}"),
                             BoxShowCalories(
                                 title: "Basal Metabolic Rate (BMR)",
-                                value: "1282"),
+                                value: "${user.bmr}"),
                             SizedBox(
                               height: 5,
                             ),
@@ -106,7 +128,8 @@ class _CaloriesCountState extends State<CaloriesCount> {
                             ),
                             currentEvent != ""
                                 ? BoxShowText(
-                                    text: "${currentEvent} = 1987",
+                                    text:
+                                        "${currentEvent} = ${tdee * double.parse(user.bmr)} kcal",
                                   )
                                 : Column(
                                     children: [
@@ -123,6 +146,7 @@ class _CaloriesCountState extends State<CaloriesCount> {
                                           onChanged: (value) {
                                             setState(() {
                                               currentEvent = value;
+                                              tdee = 1.2;
                                             });
                                           },
                                         ),
@@ -136,6 +160,7 @@ class _CaloriesCountState extends State<CaloriesCount> {
                                           onChanged: (value) {
                                             setState(() {
                                               currentEvent = value;
+                                              tdee = 1.375;
                                             });
                                           },
                                         ),
@@ -149,6 +174,7 @@ class _CaloriesCountState extends State<CaloriesCount> {
                                           onChanged: (value) {
                                             setState(() {
                                               currentEvent = value;
+                                              tdee = 1.55;
                                             });
                                           },
                                         ),
@@ -162,6 +188,7 @@ class _CaloriesCountState extends State<CaloriesCount> {
                                           onChanged: (value) {
                                             setState(() {
                                               currentEvent = value;
+                                              tdee = 1.725;
                                             });
                                           },
                                         ),
@@ -175,6 +202,7 @@ class _CaloriesCountState extends State<CaloriesCount> {
                                           onChanged: (value) {
                                             setState(() {
                                               currentEvent = value;
+                                              tdee = 1.9;
                                             });
                                           },
                                         ),
@@ -182,75 +210,95 @@ class _CaloriesCountState extends State<CaloriesCount> {
                                     ],
                                   ),
                             currentEvent != ""
-                                ? GridView.builder(
-                                    padding: const EdgeInsets.all(20.0),
-                                    physics: NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    gridDelegate:
-                                        SliverGridDelegateWithMaxCrossAxisExtent(
-                                      maxCrossAxisExtent: 250,
-                                      childAspectRatio: 3 / 4,
-                                      crossAxisSpacing: 20,
-                                      mainAxisSpacing: 20,
-                                    ),
-                                    itemCount: 4,
-                                    itemBuilder: (context, index) {
-                                      return Container(
-                                        alignment: Alignment.centerLeft,
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(15),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Image.asset(
-                                                  "assets/images/menus/pho.png"),
-                                              SizedBox(
-                                                height: 7,
-                                              ),
-                                              Text(
-                                                "Food Name : ",
-                                                style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 32, 32, 32),
-                                                  fontFamily: defaultFontFamily,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 7,
-                                              ),
-                                              Text(
-                                                "Calories : ",
-                                                style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 32, 32, 32),
-                                                  fontFamily: defaultFontFamily,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 7,
-                                              ),
-                                              Text(
-                                                "Price : ",
-                                                style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 32, 32, 32),
-                                                  fontFamily: defaultFontFamily,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ],
+                                ? FutureBuilder<List<MenusResponse>>(
+                                    future: MenusService.getMenuCal(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        List<MenusResponse> carouselCard =
+                                            snapshot.data;
+                                        return GridView.builder(
+                                          padding:
+                                              const EdgeInsets.only(top: 10.0),
+                                          physics:
+                                              NeverScrollableScrollPhysics(),
+                                          shrinkWrap: true,
+                                          gridDelegate:
+                                              SliverGridDelegateWithMaxCrossAxisExtent(
+                                            maxCrossAxisExtent: 250,
+                                            childAspectRatio: 3 / 4,
+                                            crossAxisSpacing: 10,
+                                            mainAxisSpacing: 10,
                                           ),
-                                        ),
-                                      );
+                                          itemCount: 4,
+                                          itemBuilder: (context, index) {
+                                            return Container(
+                                              alignment: Alignment.centerLeft,
+                                              width: double.infinity,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(15),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Image.network(
+                                                        carouselCard[index]
+                                                            .image),
+                                                    SizedBox(
+                                                      height: 7,
+                                                    ),
+                                                    Text(
+                                                      "Food Name : ${carouselCard[index].name}",
+                                                      maxLines: 2,
+                                                      style: TextStyle(
+                                                        color: Color.fromARGB(
+                                                            255, 32, 32, 32),
+                                                        fontFamily:
+                                                            defaultFontFamily,
+                                                        fontSize: 14,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 7,
+                                                    ),
+                                                    Text(
+                                                      "Calories : ${carouselCard[index].calories}",
+                                                      style: TextStyle(
+                                                        color: Color.fromARGB(
+                                                            255, 32, 32, 32),
+                                                        fontFamily:
+                                                            defaultFontFamily,
+                                                        fontSize: 14,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 7,
+                                                    ),
+                                                    Text(
+                                                      "Price : ${carouselCard[index].price}",
+                                                      style: TextStyle(
+                                                        color: Color.fromARGB(
+                                                            255, 32, 32, 32),
+                                                        fontFamily:
+                                                            defaultFontFamily,
+                                                        fontSize: 13,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        );
+                                      } else {
+                                        return Container();
+                                      }
                                     },
                                   )
                                 // Container(
@@ -282,65 +330,110 @@ class _CaloriesCountState extends State<CaloriesCount> {
                     ),
                     Container(
                       padding: EdgeInsets.symmetric(vertical: 10),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(20),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 10),
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: Colors.grey[100],
-                                borderRadius: BorderRadius.circular(10),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 10),
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[100],
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                        "Name : ${resultHistory.length == 0 ? "" : resultHistory.last.fullName}"),
+                                    SizedBox(height: 5),
+                                    Text(
+                                        "Your Daily Calorie Intake\n= ${tdee == 0 ? 0 : tdee * double.parse(user.bmr)} kcal"),
+                                    SizedBox(height: 5),
+                                    Text(
+                                        "Your Current Meal Calorie Intake\n= ${resultHistory.length == 0 ? "" : resultHistory.last.averageCalories} kcal"),
+                                    SizedBox(height: 5),
+                                  ],
+                                ),
                               ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: Row(
                                 children: [
-                                  Text("Name : "),
-                                  SizedBox(height: 5),
-                                  Text("Your Daily Calorie Intake\n= 0 kcal"),
-                                  SizedBox(height: 5),
+                                  Icon(Icons.info_outline),
                                   Text(
-                                      "Your Current Meal Calorie Intake\n= 0 kcal"),
-                                  SizedBox(height: 5),
+                                      "กรุณาเลือก Tdee ก่อนถึงจะคำนวณอาหารมื้อถัดไป"),
                                 ],
                               ),
                             ),
-                          ),
-                          Text("Recommention for Your Next Meal"),
-                          Padding(
-                            padding: const EdgeInsets.all(20),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 10),
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: Colors.grey[100],
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text("Tuna Salad 250 kcal"),
-                                  Container(
-                                      padding: EdgeInsets.all(20),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(16),
-                                        child: Image.network(
-                                          "https://thketo.com/wp-content/uploads/2021/07/%E0%B8%AA%E0%B8%A5%E0%B8%B1%E0%B8%94%E0%B8%97%E0%B8%B9%E0%B8%99%E0%B9%88%E0%B8%B2-%E0%B8%AD%E0%B8%B2%E0%B8%AB%E0%B8%B2%E0%B8%A3%E0%B8%84%E0%B8%A5%E0%B8%B5%E0%B8%99.jpg",
-                                          // height: 150.0,
-                                          // width: 100.0,
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text("Recommention for Your Next Meal"),
+                            FutureBuilder<List<MenusResponse>>(
+                              future: MenusService.getMenuCal(),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.done) {
+                                  List<MenusResponse> carouselCard =
+                                      snapshot.data;
+                                  carouselCard.sort((a, b) =>
+                                      b.calories.compareTo(a.calories));
+                                  return ListView.builder(
+                                    padding: const EdgeInsets.only(top: 10.0),
+                                    physics: NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: 2,
+                                    itemBuilder: (context, index) {
+                                      return Padding(
+                                        padding: const EdgeInsets.all(20),
+                                        child: Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 20, vertical: 10),
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey[100],
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                  "${carouselCard[index].name} ${carouselCard[index].calories} kcal"),
+                                              Container(
+                                                  padding: EdgeInsets.all(20),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16),
+                                                    child: Image.network(
+                                                      carouselCard[index].image,
+                                                      // height: 150.0,
+                                                      // width: 100.0,
+                                                    ),
+                                                  )
+                                                  // Image.network(
+                                                  //     "https://thketo.com/wp-content/uploads/2021/07/%E0%B8%AA%E0%B8%A5%E0%B8%B1%E0%B8%94%E0%B8%97%E0%B8%B9%E0%B8%99%E0%B9%88%E0%B8%B2-%E0%B8%AD%E0%B8%B2%E0%B8%AB%E0%B8%B2%E0%B8%A3%E0%B8%84%E0%B8%A5%E0%B8%B5%E0%B8%99.jpg"),
+                                                  )
+                                            ],
+                                          ),
                                         ),
-                                      )
-                                      // Image.network(
-                                      //     "https://thketo.com/wp-content/uploads/2021/07/%E0%B8%AA%E0%B8%A5%E0%B8%B1%E0%B8%94%E0%B8%97%E0%B8%B9%E0%B8%99%E0%B9%88%E0%B8%B2-%E0%B8%AD%E0%B8%B2%E0%B8%AB%E0%B8%B2%E0%B8%A3%E0%B8%84%E0%B8%A5%E0%B8%B5%E0%B8%99.jpg"),
-                                      )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
+                                      );
+                                    },
+                                  );
+                                } else {
+                                  return Container();
+                                }
+                              },
+                            )
+                          ],
+                        ),
                       ),
                     )
                   ],

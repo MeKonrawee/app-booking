@@ -9,57 +9,56 @@ String accountModelToJson(AccountModel data) => json.encode(data.toJson());
 
 class AccountModel {
   AccountModel({
-    @required this.sex,
-    @required this.password,
-    @required this.fullname,
-    @required this.phonenumber,
-    @required this.height,
-    @required this.email,
-    @required this.calories,
     @required this.weight,
-    @required this.username,
+    @required this.phonenumber,
+    @required this.email,
     @required this.birthday,
-    @required this.type,
+    @required this.fullname,
+    @required this.username,
+    @required this.sex,
+    @required this.bmr,
+    @required this.height,
+    @required this.bmi,
+    @required this.password,
   });
 
-  String sex;
-  String password;
-  String fullname;
-  String phonenumber;
-  String height;
-  String email;
-  int calories;
   String weight;
+  String phonenumber;
+  String email;
+  String birthday;
+  String fullname;
   String username;
-  DateTime birthday;
-  String type;
+  String sex;
+  String bmr;
+  String height;
+  String bmi;
+  String password;
 
   factory AccountModel.fromJson(Map<String, dynamic> json) => AccountModel(
-        sex: json["sex"],
-        password: json["password"],
-        fullname: json["fullname"],
-        phonenumber: json["phonenumber"],
-        height: json["height"],
-        email: json["email"],
-        calories: json["calories"],
         weight: json["weight"],
+        phonenumber: json["phonenumber"],
+        email: json["email"],
+        birthday: json["Birthday"],
+        fullname: json["fullname"],
         username: json["username"],
-        birthday: DateTime.parse(json["Birthday"]),
-        type: json["type"],
+        sex: json["sex"],
+        bmr: json["bmr"],
+        height: json["height"],
+        bmi: json["bmi"],
+        password: json["password"],
       );
 
   Map<String, dynamic> toJson() => {
-        "sex": sex,
-        "password": password,
-        "fullname": fullname,
-        "phonenumber": phonenumber,
-        "height": height,
-        "email": email,
-        "calories": calories,
         "weight": weight,
+        "phonenumber": phonenumber,
+        "email": email,
+        "Birthday": birthday,
+        "fullname": fullname,
         "username": username,
-        "Birthday":
-            "${birthday.year.toString().padLeft(4, '0')}-${birthday.month.toString().padLeft(2, '0')}-${birthday.day.toString().padLeft(2, '0')}",
-        "type": type,
+        "sex": sex,
+        "bmr": bmr,
+        "height": height,
+        "bmi": bmi,
+        "password": password,
       };
 }

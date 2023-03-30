@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/common/button.dart';
+import 'package:flutter_app/models/response/account_response.dart';
+import 'package:flutter_app/services/account_services.dart';
 import 'package:flutter_app/themes/constant.dart';
 import 'package:flutter_app/widgets/ListDataDropdown.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_app/controllers/userInfo.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 
 class AccountCustomer extends StatefulWidget {
   @override
@@ -13,11 +17,11 @@ class AccountCustomer extends StatefulWidget {
 class _AccountCustomerState extends State<AccountCustomer> {
   String currentEvent = "";
   bool edit = false;
-  String sex = "Male";
 
   TextEditingController fullname = new TextEditingController();
   TextEditingController username = new TextEditingController();
   TextEditingController birthday = new TextEditingController();
+  TextEditingController calories = new TextEditingController();
   TextEditingController gender = new TextEditingController();
   TextEditingController weight = new TextEditingController();
   TextEditingController height = new TextEditingController();
@@ -25,14 +29,14 @@ class _AccountCustomerState extends State<AccountCustomer> {
   TextEditingController email = new TextEditingController();
 
   void getAccountData() async {
-    // fullname.text = ;
-    // username.text =
-    // birthday.text =
-    //   gender.text =
-    //   weight.text =
-    //   height.text =
-    //    phone.text =
-    //    email.text =
+    fullname.text = user.fullname;
+    username.text = user.username;
+    birthday.text = user.birthday;
+    gender.text = user.sex;
+    weight.text = user.weight;
+    height.text = user.height;
+    phone.text = user.phonenumber;
+    email.text = user.email;
   }
 
   @override
@@ -174,11 +178,11 @@ class _AccountCustomerState extends State<AccountCustomer> {
                           );
                         },
                       ).toList(),
-                      value: sex,
+                      value: gender.text,
                       onChanged: edit
                           ? (String value) {
                               setState(() {
-                                sex = value;
+                                gender.text = value;
                               });
                             }
                           : null,
@@ -217,7 +221,24 @@ class _AccountCustomerState extends State<AccountCustomer> {
                                     const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: ButtonKYP(
                                   text: "Save",
-                                  process: () {
+                                  process: () async {
+                                    var sessionManager = SessionManager();
+                                    AccountModel sendsave = AccountModel(
+                                      bmi: user.bmi,
+                                      birthday: birthday.text,
+                                      bmr: user.bmr,
+                                      email: email.text,
+                                      fullname: fullname.text,
+                                      height: height.text,
+                                      password: user.password,
+                                      phonenumber: phone.text,
+                                      sex: gender.text,
+                                      username: username.text,
+                                      weight: weight.text,
+                                    );
+                                    await sessionManager.set("user", sendsave);
+                                    user = sendsave;
+                                    Accountservices.updateAccount(sendsave);
                                     setState(() {
                                       edit = false;
                                     });
