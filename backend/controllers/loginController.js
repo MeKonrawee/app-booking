@@ -15,7 +15,6 @@ const Register = async (req, res, next) => {
     const diffInMs = currentDate.getTime() - birthDate.getTime();
     const ageInMs = new Date(diffInMs).getTime();
     const age = Math.abs(ageInMs / (1000 * 60 * 60 * 24 * 365.25));
-
     if (data.sex === "Female") {
       const bmr =
         655 +

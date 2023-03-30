@@ -15,6 +15,7 @@ const {
   GetMenuService: getMenu,
   DeleteMenuService: deleteMenu,
   FindMenuService: findMenu,
+  MenuLimitCalService: getMenuLimitCal,
 } = require("../controllers/menuController");
 const {
   GetTableService: getTable,
@@ -38,6 +39,7 @@ router.post("/account/:fullname", updateAccount);
 router.post("/menus", insertMenu);
 router.post("/menus/:id", updateMenu);
 router.get("/menus", getMenu);
+router.get("/menus/limit/cal", getMenuLimitCal);
 router.get("/menus/delete/:id", deleteMenu);
 router.get("/menus/find/:id", findMenu);
 router.get("/booking", getBooking);

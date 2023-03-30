@@ -83,10 +83,40 @@ const updateMenu = async (req, res, next) => {
   }
 };
 
+const getMenuLimitCal = async (req, res, next) => {
+  try {
+    const menus = await firestore.collection("menus");
+    const data = await menus.get();
+    const menusArray = [];
+    if (data.empty) {
+      return res.status(404).json("No menu found");
+    } else {
+      data.forEach((doc) => {
+        const menu = new MenuResponse(
+          doc.id,
+          doc.data().calories,
+          doc.data().image,
+          doc.data().name,
+          doc.data().price,
+          doc.data().quantity
+        );
+        if (menu.calories <= 700) {
+          menusArray.push(menu);
+        }
+      });
+      return res.status(200).json(menusArray);
+    }
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json("bad request");
+  }
+};
+
 module.exports = {
   InsertMenuService: insertMenu,
   UpdateMenuService: updateMenu,
   GetMenuService: getMenu,
   DeleteMenuService: deleteMenu,
   FindMenuService: findMenu,
+  MenuLimitCalService: getMenuLimitCal,
 };
