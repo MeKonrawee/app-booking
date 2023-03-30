@@ -1,7 +1,12 @@
+import 'dart:async';
+import 'package:flutter_app/controllers/cartList.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/button.dart';
 import 'package:flutter_app/models/bookingDetail_Model.dart';
+import 'package:flutter_app/models/response/booking_response.dart';
 import 'package:flutter_app/pages/FoodHistory.dart';
+import 'package:flutter_app/pages/mainScreen.dart';
+import 'package:flutter_app/services/booking_services.dart';
 
 import '../animation/ScaleRoute.dart';
 import '../themes/constant.dart';
@@ -53,7 +58,7 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Name : ",
+                        "Name : ${widget.orderFood.fullname}",
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,
@@ -64,7 +69,7 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                         height: 7,
                       ),
                       Text(
-                        "Phone : ",
+                        "Phone : ${widget.orderFood.phone}",
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,
@@ -86,7 +91,7 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                         height: 7,
                       ),
                       Text(
-                        "Person Number : ",
+                        "Person Number : ${widget.orderFood.people}",
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,
@@ -97,7 +102,7 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                         height: 7,
                       ),
                       Text(
-                        "Time : ",
+                        "Time : ${widget.orderFood.timeBook}",
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,
@@ -108,7 +113,7 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                         height: 7,
                       ),
                       Text(
-                        "Booking date : ",
+                        "Booking date : ${widget.orderFood.dateBook}",
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,
@@ -173,50 +178,34 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                             SizedBox(
                               height: 5,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(
-                                  "Pho x2",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Color(0xFF3a3a3b),
+                            ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: widget.orderFood.foodList.length,
+                              itemBuilder: (context, index) {
+                                var menu = widget.orderFood.foodList[index];
+                                return Container(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "${menu.name} x${menu.quantity}",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: Color(0xFF3a3a3b),
+                                        ),
+                                      ),
+                                      Text(
+                                        "${menu.price} ฿",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: Color(0xFF3a3a3b),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  textAlign: TextAlign.left,
-                                ),
-                                Text(
-                                  "528 ฿",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Color(0xFF3a3a3b),
-                                  ),
-                                  textAlign: TextAlign.left,
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 7,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(
-                                  "Xoi x2",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Color(0xFF3a3a3b),
-                                  ),
-                                  textAlign: TextAlign.left,
-                                ),
-                                Text(
-                                  "399 ฿",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Color(0xFF3a3a3b),
-                                  ),
-                                  textAlign: TextAlign.left,
-                                )
-                              ],
+                                );
+                              },
                             ),
                             SizedBox(
                               height: 7,
@@ -233,7 +222,7 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                                   textAlign: TextAlign.left,
                                 ),
                                 Text(
-                                  "1,196 ฿",
+                                  "${widget.orderFood.totalAllPrice} ฿",
                                   style: TextStyle(
                                     fontSize: 16,
                                     color: Color(0xFF3a3a3b),
@@ -257,7 +246,7 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                                   textAlign: TextAlign.left,
                                 ),
                                 Text(
-                                  "2000 kcal",
+                                  "${widget.orderFood.cal} kcal",
                                   style: TextStyle(
                                       fontSize: 16,
                                       color: Color(0xFF3a3a3b),
@@ -281,7 +270,7 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                                   textAlign: TextAlign.left,
                                 ),
                                 Text(
-                                  "667 kcal",
+                                  "${widget.orderFood.avgCal.toStringAsFixed(2)} kcal",
                                   style: TextStyle(
                                       fontSize: 16,
                                       color: Color(0xFF3a3a3b),
@@ -303,7 +292,39 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
               width: 370,
               text: "Payment",
               process: () async {
-                Navigator.push(context, ScaleRoute(page: History()));
+                var res = await BookingServices.BookingFood(BookingModel(
+                  id: "",
+                  averageCalories:
+                      int.parse(widget.orderFood.avgCal.toStringAsFixed(0)),
+                  date:
+                      "${widget.orderFood.dateBook} ${widget.orderFood.timeBook}",
+                  foodMenu: widget.orderFood.foodList,
+                  fullName: widget.orderFood.fullname,
+                  personNumber: widget.orderFood.people.toString(),
+                  tableNumber: widget.orderFood.tableName,
+                  tel: widget.orderFood.phone,
+                  totalPrice: double.parse(
+                    widget.orderFood.totalAllPrice.toString(),
+                  ),
+                ));
+                // print(res);
+                if (res) {
+                  CartFood.clear();
+                  showDialog(
+                    context: context,
+                    builder: (_) => imageDialog('QRcode', context),
+                  );
+                  Timer(Duration(seconds: 5), () {
+                    Navigator.pop(context);
+                    Navigator.pushReplacement(
+                      context,
+                      ScaleRoute(
+                        page: MainScreen(),
+                      ),
+                    );
+                  });
+                }
+                // Navigator.push(context, ScaleRoute(page: History()));
               },
             ),
           ],
@@ -311,4 +332,44 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
       ),
     );
   }
+}
+
+Widget imageDialog(text, context) {
+  return Dialog(
+    // backgroundColor: Colors.transparent,
+    // elevation: 0,
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                '$text',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: Icon(Icons.close_rounded),
+                color: Colors.redAccent,
+              ),
+            ],
+          ),
+        ),
+        Container(
+          width: 220,
+          height: 200,
+          child: Image.network(
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png',
+            fit: BoxFit.contain,
+          ),
+        ),
+      ],
+    ),
+  );
 }

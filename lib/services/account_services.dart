@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_app/models/response/account_response.dart';
 import 'package:http/http.dart' as http;
 
 import '../common/to_boolean.dart';
@@ -38,23 +39,29 @@ class Accountservices {
     return true;
   }
 
-  static Future<bool> signIn(
+  static Future<dynamic> signIn(
     String username,
     String password,
   ) async {
-    final String url = host + "/api/login";
-    var result = await http.post(
-      Uri.parse(url),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(
-        <String, dynamic>{
-          "username": username,
-          "password": password,
+    try {
+      final String url = host + "/api/login";
+      var result = await http.post(
+        Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
         },
-      ),
-    );
-    return toBoolean(result.body);
+        body: jsonEncode(
+          <String, dynamic>{
+            "username": username,
+            "password": password,
+          },
+        ),
+      );
+
+      AccountModel resultAccount = accountModelFromJson(result.body);
+      return resultAccount;
+    } catch (e) {
+      return false;
+    }
   }
 }

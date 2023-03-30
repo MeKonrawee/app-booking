@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/models/response/booking_response.dart';
 
 BookingDetailModel bookingDetailModelFromJson(String str) =>
     BookingDetailModel.fromJson(json.decode(str));
@@ -28,7 +29,7 @@ class BookingDetailModel {
   int people;
   String dateBook;
   String timeBook;
-  List<FoodList> foodList;
+  List<FoodMenu> foodList;
   int totalAllPrice;
   int cal;
   double avgCal;
@@ -41,8 +42,8 @@ class BookingDetailModel {
         people: json["people"],
         dateBook: json["dateBook"],
         timeBook: json["timeBook"],
-        foodList: List<FoodList>.from(
-            json["foodList"].map((x) => FoodList.fromJson(x))),
+        foodList: List<FoodMenu>.from(
+            json["foodList"].map((x) => FoodMenu.fromJson(x))),
         totalAllPrice: json["totalAllPrice"],
         cal: json["cal"],
         avgCal: json["avg_cal"],

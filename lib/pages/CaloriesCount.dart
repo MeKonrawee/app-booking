@@ -284,7 +284,6 @@ class _CaloriesCountState extends State<CaloriesCount> {
                       padding: EdgeInsets.symmetric(vertical: 10),
                       child: Column(
                         children: [
-                          Text("แจ้งเตือนหลังกินแล้ว"),
                           Padding(
                             padding: const EdgeInsets.all(20),
                             child: Container(
@@ -298,15 +297,18 @@ class _CaloriesCountState extends State<CaloriesCount> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("ชื่อผู้จอง : "),
-                                  Text("ปริมาณแคลที่ ต้องการต่อวัน\n= 0 kcal"),
+                                  Text("Name : "),
+                                  SizedBox(height: 5),
+                                  Text("Your Daily Calorie Intake\n= 0 kcal"),
+                                  SizedBox(height: 5),
                                   Text(
-                                      "จำนวนแคลอรี่ที่ได้รับเมื่อกลางวัน\n= 0 kcal"),
+                                      "Your Current Meal Calorie Intake\n= 0 kcal"),
+                                  SizedBox(height: 5),
                                 ],
                               ),
                             ),
                           ),
-                          Text("แนะนำการบริโภคในมื้อถัดไป"),
+                          Text("Recommention for Your Next Meal"),
                           Padding(
                             padding: const EdgeInsets.all(20),
                             child: Container(
@@ -320,7 +322,7 @@ class _CaloriesCountState extends State<CaloriesCount> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("สลัดทูน่า 250 kcal"),
+                                  Text("Tuna Salad 250 kcal"),
                                   Container(
                                       padding: EdgeInsets.all(20),
                                       child: ClipRRect(

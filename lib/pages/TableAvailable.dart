@@ -37,10 +37,12 @@ class _TableAvailableState extends State<TableAvailable> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   List<TableResponse> carouselCard = snapshot.data;
+                  carouselCard.sort((a, b) => a.id.compareTo(b.id));
                   return Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(5.0),
                     child: MasonryGridView.builder(
                       shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
                       gridDelegate:
                           SliverSimpleGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 4,
@@ -52,40 +54,18 @@ class _TableAvailableState extends State<TableAvailable> {
                         return BookTableTiles(
                           name: carouselCard[index].number,
                           status: carouselCard[index].status,
-                          func: () {
-                            nameTable = carouselCard[index].number;
-                            Navigator.push(
-                              context,
-                              ScaleRoute(
-                                page: BookTable(nameTable),
-                              ),
-                            );
-                          },
+                          func: carouselCard[index].status
+                              ? () {
+                                  nameTable = carouselCard[index].number;
+                                  Navigator.push(
+                                    context,
+                                    ScaleRoute(
+                                      page: BookTable(nameTable),
+                                    ),
+                                  );
+                                }
+                              : () {},
                         );
-                        // BoxItemFood(
-                        //   dataMenu: carouselCard[index],
-                        //   func: () {
-                        //     setState(() {
-                        //       var duplicate = CartFood.firstWhere(
-                        //         (element) =>
-                        //             element.name == carouselCard[index].name,
-                        //         orElse: () => null,
-                        //       );
-                        //       if (duplicate == null) {
-                        //         CartFood.add(
-                        //           FoodMenu(
-                        //             name: carouselCard[index].name,
-                        //             cal: carouselCard[index].calories,
-                        //             price: carouselCard[index].price,
-                        //             quantity: 1,
-                        //           ),
-                        //         );
-                        //       } else {
-                        //         duplicate.quantity++;
-                        //       }
-                        //     });
-                        //   },
-                        // );
                       },
                     ),
                   );
@@ -121,51 +101,76 @@ class BookTableTiles extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Container(
-            padding: EdgeInsets.only(left: 20, right: 5, top: 10, bottom: 1),
-            // decoration: new BoxDecoration(boxShadow: [
-            //   new BoxShadow(
-            //     color: Color(0xFFfae3e2),
-            //     blurRadius: 25.0,
-            //     offset: Offset(0.0, 0.75),
-            //   ),
-            // ]),
-            child: Card(
-                color: Colors.white,
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(3.0),
-                  ),
+            child: Center(
+                child: Column(
+              children: [
+                Image.asset(
+                  status
+                      ? 'assets/images/Table/table.png'
+                      : 'assets/images/Table/untable.png',
+                  height: 70,
                 ),
-                child: Container(
-                  width: 60,
-                  height: 60,
-                  child: Center(
-                      child: Image.asset(
-                    status
-                        ? 'assets/images/Table/table.png'
-                        : 'assets/images/Table/untable.png',
-                    width: 50,
-                    height: 50,
-                  )),
-                )),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              left: 20,
-              right: 5,
-            ),
-            child: Text(name,
-                style: TextStyle(
-                    color: Color(0xFF6e6e71),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400)),
+                Text(name,
+                    style: TextStyle(
+                        color: Color(0xFF6e6e71),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400)),
+              ],
+            )),
           ),
         ],
       ),
     );
   }
 }
+
+// InkWell(
+//       onTap: func,
+//       child: Column(
+//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//         children: <Widget>[
+//           Container(
+//             padding: EdgeInsets.only(left: 20, right: 5, top: 10, bottom: 1),
+//             // decoration: new BoxDecoration(boxShadow: [
+//             //   new BoxShadow(
+//             //     color: Color(0xFFfae3e2),
+//             //     blurRadius: 25.0,
+//             //     offset: Offset(0.0, 0.75),
+//             //   ),
+//             // ]),
+//             child: Card(
+//                 color: Colors.white,
+//                 elevation: 0,
+//                 shape: RoundedRectangleBorder(
+//                   borderRadius: const BorderRadius.all(
+//                     Radius.circular(3.0),
+//                   ),
+//                 ),
+//                 child: Container(
+//                   width: 60,
+//                   height: 60,
+//                   child: Center(
+//                       child: Image.asset(
+//                     'assets/images/Table/' + imageUrl + ".png",
+//                     width: 50,
+//                     height: 50,
+//                   )),
+//                 )),
+//           ),
+//           Padding(
+//             padding: EdgeInsets.only(
+//               left: 20,
+//               right: 5,
+//             ),
+//             child: Text(name,
+//                 style: TextStyle(
+//                     color: Color(0xFF6e6e71),
+//                     fontSize: 14,
+//                     fontWeight: FontWeight.w400)),
+//           ),
+//         ],
+//       ),
+//     );
 
 class TableAvailableTitle extends StatelessWidget {
   @override

@@ -2,10 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/controllers/cartList.dart';
+import 'package:flutter_app/controllers/userInfo.dart';
 import 'package:flutter_app/models/bookingDetail_Model.dart';
 import 'package:flutter_app/models/response/booking_response.dart';
 import 'package:flutter_app/models/response/menu_response.dart';
 import 'package:flutter_app/pages/FoodOrderConfirm.dart';
+import 'package:intl/intl.dart';
 
 import '../animation/ScaleRoute.dart';
 import '../common/button.dart';
@@ -47,6 +49,13 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
   void initState() {
     calculate();
     super.initState();
+  }
+
+  String formatTimeOfDay(TimeOfDay tod) {
+    final now = new DateTime.now();
+    final dt = DateTime(now.year, now.month, now.day, tod.hour, tod.minute);
+    final format = DateFormat.jm(); //"6:00 AM"
+    return format.format(dt);
   }
 
   @override
@@ -245,24 +254,32 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                   width: 370,
                   text: "Confirm Order",
                   process: () async {
-                    List<FoodList> foodPriceMenu = [];
+                    List<FoodMenu> foodPriceMenu = [];
                     for (FoodMenu i in CartFood) {
                       var sum = i.price * i.quantity;
                       foodPriceMenu.add(
-                        FoodList(
-                          foodname: i.name,
-                          totalPrice: sum,
+                        FoodMenu(
+                          name: i.name,
+                          cal: i.cal,
+                          price: i.price,
                           quantity: i.quantity,
                         ),
                       );
                     }
+
+                    var timeBook = formatTimeOfDay(
+                      TimeOfDay.fromDateTime(DateTime.now()),
+                    );
+                    String dateBook =
+                        DateFormat('yyyy-MM-dd').format(DateTime.now());
+
                     BookingDetailModel resultConfirm = BookingDetailModel(
-                        fullname: "",
-                        phone: "",
+                        fullname: user.fullname,
+                        phone: user.phonenumber,
                         tableName: widget.table,
                         people: widget.people,
-                        dateBook: "",
-                        timeBook: "",
+                        dateBook: dateBook,
+                        timeBook: timeBook,
                         foodList: foodPriceMenu,
                         totalAllPrice: price,
                         cal: cal_total,
@@ -383,7 +400,7 @@ class TotalCalculationWidget extends StatelessWidget {
                     textAlign: TextAlign.left,
                   ),
                   Text(
-                    "${average_cal} kcal",
+                    "${average_cal.toStringAsFixed(2)} kcal",
                     style: TextStyle(
                         fontSize: 16,
                         color: Color(0xFF3a3a3b),

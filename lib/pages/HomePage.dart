@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/animation/ScaleRoute.dart';
 import 'package:flutter_app/pages/SignInPage.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import '../widgets/PopularFoodsWidget.dart';
 import 'TableAvailable.dart';
 
@@ -32,8 +33,14 @@ class _HomePageState extends State<HomePage> {
                 Icons.login,
                 color: Color(0xFF3a3737),
               ),
-              onPressed: () {
-                Navigator.push(context, ScaleRoute(page: SignInPage()));
+              onPressed: () async {
+                await SessionManager().remove("user");
+                Navigator.push(
+                  context,
+                  ScaleRoute(
+                    page: SignInPage(),
+                  ),
+                );
               })
         ],
       ),

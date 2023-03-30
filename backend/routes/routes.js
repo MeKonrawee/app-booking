@@ -7,7 +7,13 @@ const {
 const {
   InsertMenuService: insertMenu,
   GetMenuService: getMenu,
+  DeleteMenuService: deleteMenu,
 } = require("../controllers/menuController");
+const {
+  GetTableService: getTable,
+  DeleteTableService: deleteTable,
+  AddTableService: addTable,
+} = require("../controllers/tableController");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDoc = require("../swagger");
 
@@ -19,7 +25,11 @@ router.post("/register", Register);
 router.post("/login", Login);
 router.post("/menus", insertMenu);
 router.get("/menus", getMenu);
+router.get("/menus/delete/:id", deleteMenu);
 router.get("/booking", getBooking);
+router.get("/tables", getTable);
+router.get("/tables/delete/:id", deleteTable);
+router.get("/tables/add/:number", addTable);
 
 module.exports = {
   routes: router,

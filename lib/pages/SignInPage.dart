@@ -1,6 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/animation/ScaleRoute.dart';
+import 'package:flutter_app/controllers/userInfo.dart';
+import 'package:flutter_app/models/response/account_response.dart';
 import 'package:flutter_app/pages/SignUpPage.dart';
+import 'package:flutter_app/pages/mainScreen.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 
 import '../common/button.dart';
 import '../services/account_services.dart';
@@ -16,6 +22,29 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   TextEditingController username = new TextEditingController();
   TextEditingController password = new TextEditingController();
+
+  void session() async {
+    var checkSession = await SessionManager().get("user");
+    if (checkSession != null) {
+      Navigator.pushReplacement(
+        context,
+        ScaleRoute(
+          page: MainScreen(),
+        ),
+      );
+      user = AccountModel.fromJson(
+        await SessionManager().get("user"),
+      );
+    }
+    // await SessionManager().remove("user");
+  }
+
+  @override
+  void initState() {
+    session();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -128,88 +157,38 @@ class _SignInPageState extends State<SignInPage> {
                     height: 55,
                     width: 350,
                     text: "SIGN IN",
-                    process: () {
-                      Accountservices.signIn(username.text, password.text)
-                          .then((check) => {
-                                if (check)
-                                  {
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return StatefulBuilder(
-                                          builder: (BuildContext context,
-                                              StateSetter setState) {
-                                            return HomePage();
-                                            // AlertDialog(
-                                            //   title: Text(
-                                            //     'Welcome to Korn-Yapa!',
-                                            //     style: TextStyle(
-                                            //       fontSize: 20,
-                                            //       fontWeight: FontWeight.bold,
-                                            //     ),
-                                            //   ),
-                                            //   content: Text(
-                                            //     'What would you like to?',
-                                            //     style: TextStyle(
-                                            //       fontSize: 16,
-                                            //     ),
-                                            //   ),
-                                            //   actions: [
-                                            //     ButtonKYP(
-                                            //       height: 40,
-                                            //       width: 200,
-                                            //       text: 'Book Table',
-                                            //       process: () async {
-                                            //         Navigator.push(
-                                            //             context,
-                                            //             ScaleRoute(
-                                            //                 page: BookTable()));
-                                            //       },
-                                            //     ),
-                                            //     SizedBox(
-                                            //       height: 7,
-                                            //     ),
-                                            //     ButtonKYP(
-                                            //       height: 40,
-                                            //       width: 200,
-                                            //       text: 'Count Calory',
-                                            //       process: () async {
-                                            //         Navigator.push(
-                                            //             context,
-                                            //             ScaleRoute(
-                                            //                 page:
-                                            //                     CaloryCount()));
-                                            //       },
-                                            //     ),
-                                            //   ],
-                                            // );
-                                          },
-                                        );
-                                      },
-                                    )
-                                  }
-                                else
-                                  {
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: Text('Can not Sign In!'),
-                                          content: Text(
-                                              'Username or Password invalid.'),
-                                          actions: [
-                                            TextButton(
-                                              child: Text('Close'),
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    )
-                                  }
-                              });
+                    process: () async {
+                      var sessionManager = SessionManager();
+                      await Accountservices.signIn(username.text, password.text)
+                          .then((check) async {
+                        if (check != false) {
+                          await sessionManager.set("user", check);
+                          Navigator.pushReplacement(
+                            context,
+                            ScaleRoute(
+                              page: MainScreen(),
+                            ),
+                          );
+                        } else {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text('Can not Sign In!'),
+                                content: Text('Username or Password invalid.'),
+                                actions: [
+                                  TextButton(
+                                    child: Text('Close'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
+                      });
                     },
                   ),
                   SizedBox(
