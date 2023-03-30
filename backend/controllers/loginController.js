@@ -42,7 +42,11 @@ const Login = async (req, res, next) => {
 
 const updateAccount = async (req, res, next) => {
   try {
-    
+    const id = req.params.id;
+    const data = req.body;
+    const account = await firestore.collection("account").doc(id);
+    await account.update(data);
+    return res.status(200).json("account updated successfully");
   }  catch (err) {
     console.error(err);
     return res.status(400).json("bad request");
