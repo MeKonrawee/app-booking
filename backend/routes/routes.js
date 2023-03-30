@@ -1,6 +1,9 @@
 const express = require("express");
 const { RegisterService: Register } = require("../controllers/loginController");
-const { LoginService: Login } = require("../controllers/loginController");
+const {
+  LoginService: Login,
+  UpdateAccountService: updateAccount,
+} = require("../controllers/loginController");
 const {
   BookingService: getBooking,
   InsertBookingService: insertBooking,
@@ -12,6 +15,7 @@ const {
   GetMenuService: getMenu,
   DeleteMenuService: deleteMenu,
   FindMenuService: findMenu,
+  MenuLimitCalService: getMenuLimitCal,
 } = require("../controllers/menuController");
 const {
   GetTableService: getTable,
@@ -31,15 +35,17 @@ router.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 router.post("/register", Register);
 router.post("/login", Login);
+router.post("/account/:fullname", updateAccount);
 router.post("/menus", insertMenu);
 router.post("/menus/:id", updateMenu);
 router.get("/menus", getMenu);
+router.get("/menus/limit/cal", getMenuLimitCal);
 router.get("/menus/delete/:id", deleteMenu);
 router.get("/menus/find/:id", findMenu);
 router.get("/booking", getBooking);
 router.post("/booking", insertBooking);
 router.get("/tables", getTable);
-router.get("/tables/:number", updateTable);
+router.post("/tables", updateTable);
 router.get("/tables/delete/:id", deleteTable);
 router.get("/tables/add/:number", addTable);
 router.get("/history/:name", getHistory);
