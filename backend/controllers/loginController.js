@@ -40,7 +40,17 @@ const Login = async (req, res, next) => {
   }
 };
 
+const updateAccount = async (req, res, next) => {
+  try {
+    
+  }  catch (err) {
+    console.error(err);
+    return res.status(400).json("bad request");
+  }
+};
+
 module.exports = {
   RegisterService: Register,
   LoginService: Login,
+  UpdateAccountService: updateAccount
 };
