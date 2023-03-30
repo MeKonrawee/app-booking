@@ -57,7 +57,7 @@ const addTable = async (req, res, next) => {
 
 const updateTable = async (req, res, next) => {
   try {
-    const number = req.params.number;
+    const number = req.body.table;
     const data = {
       number: number,
       status: true,
