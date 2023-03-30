@@ -42,12 +42,23 @@ const Login = async (req, res, next) => {
 
 const updateAccount = async (req, res, next) => {
   try {
-    const id = req.params.id;
+    const fullname = req.params.fullname;
     const data = req.body;
-    const account = await firestore.collection("account").doc(id);
-    await account.update(data);
-    return res.status(200).json("account updated successfully");
-  }  catch (err) {
+    const account = await firestore
+      .collection("account")
+      .where("fullname", "==", fullname);
+    const check = await account.get();
+    if (check.empty) {
+      return res.status(200).json("account not found");
+    }
+
+    const response = check.docs.map((doc) => {
+      return doc.id;
+    });
+    const id = response[0];
+    await firestore.collection("account").doc(id).update(data);
+    return res.status(200).json("Success!");
+  } catch (err) {
     console.error(err);
     return res.status(400).json("bad request");
   }
@@ -56,5 +67,5 @@ const updateAccount = async (req, res, next) => {
 module.exports = {
   RegisterService: Register,
   LoginService: Login,
-  UpdateAccountService: updateAccount
+  UpdateAccountService: updateAccount,
 };

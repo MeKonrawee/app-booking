@@ -1,6 +1,9 @@
 const express = require("express");
 const { RegisterService: Register } = require("../controllers/loginController");
-const { LoginService: Login, UpdateAccountService: updateAccount } = require("../controllers/loginController");
+const {
+  LoginService: Login,
+  UpdateAccountService: updateAccount,
+} = require("../controllers/loginController");
 const {
   BookingService: getBooking,
   InsertBookingService: insertBooking,
@@ -31,7 +34,7 @@ router.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 router.post("/register", Register);
 router.post("/login", Login);
-router.post("/account/:id", updateAccount);
+router.post("/account/:fullname", updateAccount);
 router.post("/menus", insertMenu);
 router.post("/menus/:id", updateMenu);
 router.get("/menus", getMenu);
