@@ -81,7 +81,7 @@ const getHistory = async (req, res, next) => {
             total_price: doc.data().total_price,
             average_calories: doc.data().average_calories,
           };
-        })[0]
+        })
       );
     }
   } catch (err) {
