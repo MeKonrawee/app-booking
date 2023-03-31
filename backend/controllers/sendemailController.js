@@ -4,7 +4,8 @@ const nodemailer = require("nodemailer");
 
 const sendEmail = async (req, res, next) => {
   try {
-    const emailUser = req.params.email;
+    const urlObj = url.parse(req.url);
+    const queryParams = querystring.parse(urlObj.query);
     let transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -16,7 +17,7 @@ const sendEmail = async (req, res, next) => {
     // setup email data
     let mailOptions = {
       from: "konrawee.p62@chandra.ac.th",
-      to: emailUser,
+      to: queryParams.email,
       subject: "You forgot the password",
       text: "OTP is 4656",
     };
