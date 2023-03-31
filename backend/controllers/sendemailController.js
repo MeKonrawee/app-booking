@@ -39,7 +39,7 @@ const sendEmail = async (req, res, next) => {
       if (error) {
         return res.status(404).send(error);
       } else {
-        return res.status(200).send("ส่งรหัส verify แล้ว");
+        return res.status(200).send(verifyNumber);
       }
     });
   } catch (err) {
