@@ -20,13 +20,13 @@ const sendEmail = async (req, res, next) => {
     var transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "konrawee.p62@chandra.ac.th",
-        pass: "1320700283965",
+        user: "konrawee207@yahoo.com",
+        pass: "wee20071997",
       },
     });
 
     var mailOptions = {
-      from: "findjobmobileapp@gmail.com",
+      from: "konrawee207@gmail.com",
       to: email,
       subject: "KYP app [reset password]",
       html:
