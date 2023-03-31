@@ -52,7 +52,7 @@ router.get("/tables/delete/:id", deleteTable);
 router.get("/tables/add/:number", addTable);
 router.get("/history/:name", getHistory);
 router.get("/payment/list", getPayment);
-router.get("/send/email/:email", sendEmail);
+router.get("/send/email", sendEmail);
 
 module.exports = {
   routes: router,
