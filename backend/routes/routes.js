@@ -3,6 +3,7 @@ const { RegisterService: Register } = require("../controllers/loginController");
 const {
   LoginService: Login,
   UpdateAccountService: updateAccount,
+  ForgotPasswordService: forgotPassword,
 } = require("../controllers/loginController");
 const {
   BookingService: getBooking,
@@ -53,7 +54,7 @@ router.get("/tables/add/:number", addTable);
 router.get("/history/:name", getHistory);
 router.get("/payment/list", getPayment);
 router.get("/send/email/:email", sendEmail);
-router.get("/send/email", sendEmail);
+router.get("/forget/:email/:password", forgotPassword);
 
 module.exports = {
   routes: router,
