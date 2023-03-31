@@ -135,7 +135,9 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                   InkWell(
                     onTap: () => Navigator.push(
-                        context, ScaleRoute(page: ForgotPassword())),
+                      context,
+                      MaterialPageRoute(builder: (context) => ForgotPassword()),
+                    ),
                     child: Container(
                       width: double.infinity,
                       child: Text(

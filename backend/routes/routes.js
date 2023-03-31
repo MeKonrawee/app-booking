@@ -28,7 +28,9 @@ const {
 } = require("../controllers/paymentController");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDoc = require("../swagger");
-
+const {
+  SendEmailService: sendEmail,
+} = require("../controllers/sendemailController");
 const router = express.Router();
 
 router.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
@@ -50,6 +52,7 @@ router.get("/tables/delete/:id", deleteTable);
 router.get("/tables/add/:number", addTable);
 router.get("/history/:name", getHistory);
 router.get("/payment/list", getPayment);
+router.get("/send/email/:email", sendEmail);
 
 module.exports = {
   routes: router,

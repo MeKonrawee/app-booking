@@ -50,7 +50,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       ),
                       filled: true,
                       prefixIcon: Icon(
-                        Icons.email,
+                        Icons.person,
                         color: Color(0xFF666666),
                         size: defaultIconSize,
                       ),
@@ -61,15 +61,16 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           fontSize: defaultFontSize),
                       hintText: "Email",
                     ),
+                    // controller: email,
                   ),
                   SizedBox(
                     height: 15,
                   ),
                   ButtonKYP(
+                    height: 55,
+                    width: 350,
                     text: "Send Email",
-                    process: () {
-                      print("click");
-                    },
+                    process: () async {},
                   ),
                   SizedBox(
                     height: 2,
@@ -87,7 +88,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   children: <Widget>[
                     Container(
                       child: Text(
-                        "Don't forget password? ",
+                        "Have an account? ",
                         style: TextStyle(
                           color: Color(0xFF666666),
                           fontFamily: defaultFontFamily,
