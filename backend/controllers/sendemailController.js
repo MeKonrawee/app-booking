@@ -1,7 +1,6 @@
 "use strict";
 
 const nodemailer = require("nodemailer");
-const firestore = firebase.firestore();
 
 const sendEmail = async (req, res, next) => {
   try {
