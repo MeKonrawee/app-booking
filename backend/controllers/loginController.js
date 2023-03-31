@@ -87,8 +87,36 @@ const updateAccount = async (req, res, next) => {
   }
 };
 
+const forgotPassword = async (req, res, next) => {
+  try {
+    const email = req.params.email;
+    const password = req.params.password;
+    const account = await firestore
+      .collection("account")
+      .where("email", "==", email);
+    const check = await account.get();
+    if (check.empty) {
+      return res.status(200).json("account not found");
+    }
+
+    const response = check.docs.map((doc) => {
+      return doc.id;
+    });
+    const id = response[0];
+    await firestore
+      .collection("account")
+      .doc(id)
+      .update({ password: password });
+    return res.status(200).json("Success!");
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json("bad request");
+  }
+};
+
 module.exports = {
   RegisterService: Register,
   LoginService: Login,
   UpdateAccountService: updateAccount,
+  ForgotPasswordService: forgotPassword,
 };
