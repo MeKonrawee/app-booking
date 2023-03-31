@@ -4,6 +4,8 @@ const nodemailer = require("nodemailer");
 
 const sendEmail = async (req, res, next) => {
   try {
+    const url = require("url");
+    const querystring = require("querystring");
     const urlObj = url.parse(req.url);
     const queryParams = querystring.parse(urlObj.query);
     let transporter = nodemailer.createTransport({
@@ -14,7 +16,6 @@ const sendEmail = async (req, res, next) => {
       },
     });
 
-    // setup email data
     let mailOptions = {
       from: "konrawee.p62@chandra.ac.th",
       to: queryParams.email,
@@ -22,7 +23,6 @@ const sendEmail = async (req, res, next) => {
       text: "OTP is 4656",
     };
 
-    // send email
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.log(error);
