@@ -46,12 +46,12 @@ class _MainScreenState extends State<MainScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.calculate_rounded),
-            label: 'Calory',
+            label: 'Calorie',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.history_rounded),
             label: 'History',
-          ), 
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Account',
