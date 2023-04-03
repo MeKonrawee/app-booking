@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_app/models/response/history_response.dart';
 import 'package:flutter_app/themes/constant.dart';
 
@@ -45,7 +42,7 @@ class _DetailHistoryState extends State<DetailHistory> {
         elevation: 0,
         leading: BackButton(color: Color(0xFF3a3737)),
         title: Text(
-          "Detail Food",
+          "Detail History",
           style: TextStyle(
               color: Color(0xFF3a3737),
               fontSize: 16,
