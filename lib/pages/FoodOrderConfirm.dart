@@ -262,7 +262,7 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 Text(
-                                  "Average Calory for a person",
+                                  "Average Calorie/person",
                                   maxLines: 2,
                                   style: TextStyle(
                                       fontSize: 14,

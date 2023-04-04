@@ -335,7 +335,7 @@ class TotalCalculationWidget extends StatelessWidget {
         ),
         child: Container(
           alignment: Alignment.center,
-          padding: EdgeInsets.only(left: 25, right: 30, top: 10, bottom: 10),
+          padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
           child: Column(
             children: <Widget>[
               SizedBox(
@@ -393,7 +393,7 @@ class TotalCalculationWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    "Average Calory for a person",
+                    "Average Calorie for a person",
                     maxLines: 2,
                     style: TextStyle(
                         fontSize: 14,

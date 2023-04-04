@@ -225,7 +225,7 @@ class _CaloriesCountState extends State<CaloriesCount> {
                                           shrinkWrap: true,
                                           gridDelegate:
                                               SliverGridDelegateWithMaxCrossAxisExtent(
-                                            maxCrossAxisExtent: 250,
+                                            maxCrossAxisExtent: 260,
                                             childAspectRatio: 3 / 4,
                                             crossAxisSpacing: 10,
                                             mainAxisSpacing: 10,
@@ -242,7 +242,7 @@ class _CaloriesCountState extends State<CaloriesCount> {
                                               ),
                                               child: Padding(
                                                 padding:
-                                                    const EdgeInsets.all(15),
+                                                    const EdgeInsets.all(10),
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
@@ -251,7 +251,7 @@ class _CaloriesCountState extends State<CaloriesCount> {
                                                         carouselCard[index]
                                                             .image),
                                                     SizedBox(
-                                                      height: 7,
+                                                      height: 5,
                                                     ),
                                                     Text(
                                                       "Food Name : ${carouselCard[index].name}",
@@ -265,7 +265,7 @@ class _CaloriesCountState extends State<CaloriesCount> {
                                                       ),
                                                     ),
                                                     SizedBox(
-                                                      height: 7,
+                                                      height: 5,
                                                     ),
                                                     Text(
                                                       "Calories : ${carouselCard[index].calories}",
@@ -276,9 +276,6 @@ class _CaloriesCountState extends State<CaloriesCount> {
                                                             defaultFontFamily,
                                                         fontSize: 12,
                                                       ),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 7,
                                                     ),
                                                     Text(
                                                       "Price : ${carouselCard[index].price}",
@@ -342,19 +339,30 @@ class _CaloriesCountState extends State<CaloriesCount> {
                             ),
                             Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 20),
+                                  const EdgeInsets.symmetric(horizontal: 5),
                               child: Row(
                                 children: [
                                   Icon(Icons.info_outline),
                                   Text(
                                     "Select A TDEE First for Next Meal Recommendation",
                                     maxLines: 2,
+                                    style: TextStyle(
+                                      color: Color.fromARGB(255, 32, 32, 32),
+                                      fontFamily: defaultFontFamily,
+                                      fontSize: 12,
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
                             SizedBox(
-                              height: 20,
+                              height: 10,
+                            ),
+                            Divider(
+                              color: Colors.orange,
+                              thickness: 2,
+                              indent: 40,
+                              endIndent: 40,
                             ),
                             Text("Recommention for Your Next Meal"),
                             FutureBuilder<List<MenusResponse>>(
@@ -367,16 +375,17 @@ class _CaloriesCountState extends State<CaloriesCount> {
                                   carouselCard.sort((a, b) =>
                                       b.calories.compareTo(a.calories));
                                   return ListView.builder(
-                                    padding: const EdgeInsets.only(top: 10.0),
+                                    padding: const EdgeInsets.only(top: 2.0),
                                     physics: NeverScrollableScrollPhysics(),
                                     shrinkWrap: true,
                                     itemCount: 2,
                                     itemBuilder: (context, index) {
                                       return Padding(
-                                        padding: const EdgeInsets.all(20),
+                                        padding: const EdgeInsets.only(
+                                            left: 20, right: 20, top: 10),
                                         child: Container(
                                           padding: const EdgeInsets.symmetric(
-                                              horizontal: 20, vertical: 10),
+                                              horizontal: 15, vertical: 10),
                                           width: double.infinity,
                                           decoration: BoxDecoration(
                                             color: Colors.grey[100],

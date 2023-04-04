@@ -135,14 +135,6 @@ class _DetailHistoryState extends State<DetailHistory> {
                 ),
               ),
             ),
-            // ButtonKYP(
-            //   height: 40,
-            //   width: 120,
-            //   text: "Menu",
-            //   process: () {
-            //     Navigator.push(context, ScaleRoute(page: MenuWidget()));
-            //   },
-            // ),
             Divider(
               color: Colors.orange,
               thickness: 2,
