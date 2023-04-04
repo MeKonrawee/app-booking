@@ -238,6 +238,7 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                     ),
                     Text(
                       "Each meal should not exceed 700 kcal.",
+                      maxLines: 2,
                       style: TextStyle(
                           fontSize: 14,
                           color: Color(0xFF3a3a3b),
@@ -393,6 +394,7 @@ class TotalCalculationWidget extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     "Average Calory for a person",
+                    maxLines: 3,
                     style: TextStyle(
                         fontSize: 14,
                         color: Color(0xFF3a3a3b),
@@ -613,7 +615,6 @@ class AddToCartMenu extends StatelessWidget {
             iconSize: 18,
           ),
           InkWell(
-            onTap: () => print('hello'),
             child: Container(
               width: 100.0,
               height: 35.0,

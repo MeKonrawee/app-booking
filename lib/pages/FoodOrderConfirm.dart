@@ -61,7 +61,7 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,
-                          fontSize: 16,
+                          fontSize: 14,
                         ),
                       ),
                       SizedBox(
@@ -72,7 +72,7 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,
-                          fontSize: 16,
+                          fontSize: 14,
                         ),
                       ),
                       SizedBox(
@@ -83,7 +83,7 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,
-                          fontSize: 16,
+                          fontSize: 14,
                         ),
                       ),
                       SizedBox(
@@ -94,7 +94,7 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,
-                          fontSize: 16,
+                          fontSize: 14,
                         ),
                       ),
                       SizedBox(
@@ -105,7 +105,7 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,
-                          fontSize: 16,
+                          fontSize: 14,
                         ),
                       ),
                       SizedBox(
@@ -116,7 +116,7 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,
-                          fontSize: 16,
+                          fontSize: 14,
                         ),
                       ),
                     ],
@@ -148,8 +148,8 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                     style: TextStyle(
                       color: Color.fromARGB(255, 32, 32, 32),
                       fontFamily: defaultFontFamily,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
                   Padding(
@@ -171,7 +171,7 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                               style: TextStyle(
                                 color: Color.fromARGB(255, 32, 32, 32),
                                 fontFamily: defaultFontFamily,
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                             SizedBox(
@@ -189,15 +189,16 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                                     children: [
                                       Text(
                                         "${menu.name} x${menu.quantity}",
+                                        maxLines: 2,
                                         style: TextStyle(
-                                          fontSize: 16,
+                                          fontSize: 14,
                                           color: Color(0xFF3a3a3b),
                                         ),
                                       ),
                                       Text(
                                         "${menu.price} ฿",
                                         style: TextStyle(
-                                          fontSize: 16,
+                                          fontSize: 14,
                                           color: Color(0xFF3a3a3b),
                                         ),
                                       ),
@@ -215,7 +216,7 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                                 Text(
                                   "Food Price Total",
                                   style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 14,
                                     color: Color(0xFF3a3a3b),
                                   ),
                                   textAlign: TextAlign.left,
@@ -223,7 +224,7 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                                 Text(
                                   "${widget.orderFood.totalAllPrice} ฿",
                                   style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 14,
                                     color: Color(0xFF3a3a3b),
                                   ),
                                   textAlign: TextAlign.left,
@@ -239,7 +240,7 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                                 Text(
                                   "Calories Total",
                                   style: TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 14,
                                       color: Color(0xFF3a3a3b),
                                       fontWeight: FontWeight.w400),
                                   textAlign: TextAlign.left,
@@ -247,7 +248,7 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                                 Text(
                                   "${widget.orderFood.cal} kcal",
                                   style: TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 14,
                                       color: Color(0xFF3a3a3b),
                                       fontWeight: FontWeight.w400),
                                   textAlign: TextAlign.left,
@@ -262,8 +263,9 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                               children: <Widget>[
                                 Text(
                                   "Average Calory for a person",
+                                  maxLines: 2,
                                   style: TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 14,
                                       color: Color(0xFF3a3a3b),
                                       fontWeight: FontWeight.w400),
                                   textAlign: TextAlign.left,
@@ -271,7 +273,7 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                                 Text(
                                   "${widget.orderFood.avgCal.toStringAsFixed(2)} kcal",
                                   style: TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 14,
                                       color: Color(0xFF3a3a3b),
                                       fontWeight: FontWeight.w400),
                                   textAlign: TextAlign.left,

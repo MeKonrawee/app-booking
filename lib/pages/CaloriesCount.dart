@@ -261,7 +261,7 @@ class _CaloriesCountState extends State<CaloriesCount> {
                                                             255, 32, 32, 32),
                                                         fontFamily:
                                                             defaultFontFamily,
-                                                        fontSize: 14,
+                                                        fontSize: 12,
                                                       ),
                                                     ),
                                                     SizedBox(
@@ -274,7 +274,7 @@ class _CaloriesCountState extends State<CaloriesCount> {
                                                             255, 32, 32, 32),
                                                         fontFamily:
                                                             defaultFontFamily,
-                                                        fontSize: 14,
+                                                        fontSize: 12,
                                                       ),
                                                     ),
                                                     SizedBox(
@@ -287,7 +287,7 @@ class _CaloriesCountState extends State<CaloriesCount> {
                                                             255, 32, 32, 32),
                                                         fontFamily:
                                                             defaultFontFamily,
-                                                        fontSize: 13,
+                                                        fontSize: 12,
                                                       ),
                                                     ),
                                                   ],
@@ -347,7 +347,9 @@ class _CaloriesCountState extends State<CaloriesCount> {
                                 children: [
                                   Icon(Icons.info_outline),
                                   Text(
-                                      "Select A TDEE First for Next Meal Recommendation"),
+                                    "Select A TDEE First for Next Meal Recommendation",
+                                    maxLines: 2,
+                                  ),
                                 ],
                               ),
                             ),
@@ -386,7 +388,9 @@ class _CaloriesCountState extends State<CaloriesCount> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                  "${carouselCard[index].name} ${carouselCard[index].calories} kcal"),
+                                                "${carouselCard[index].name} ${carouselCard[index].calories} kcal",
+                                                maxLines: 2,
+                                              ),
                                               Container(
                                                   padding: EdgeInsets.all(20),
                                                   child: ClipRRect(

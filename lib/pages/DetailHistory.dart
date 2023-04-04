@@ -72,7 +72,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,
-                          fontSize: 16,
+                          fontSize: 14,
                         ),
                       ),
                       SizedBox(
@@ -83,7 +83,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,
-                          fontSize: 16,
+                          fontSize: 14,
                         ),
                       ),
                       SizedBox(
@@ -94,7 +94,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,
-                          fontSize: 16,
+                          fontSize: 14,
                         ),
                       ),
                       SizedBox(
@@ -105,7 +105,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,
-                          fontSize: 16,
+                          fontSize: 14,
                         ),
                       ),
                       SizedBox(
@@ -116,7 +116,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,
-                          fontSize: 16,
+                          fontSize: 14,
                         ),
                       ),
                       SizedBox(
@@ -127,7 +127,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,
-                          fontSize: 16,
+                          fontSize: 14,
                         ),
                       ),
                     ],
@@ -182,7 +182,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                               style: TextStyle(
                                 color: Color.fromARGB(255, 32, 32, 32),
                                 fontFamily: defaultFontFamily,
-                                fontSize: 16,
+                                fontSize: 14,
                               ),
                             ),
                             SizedBox(
@@ -199,7 +199,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                                     Text(
                                       "${widget.detail.foodMenu[index].name} x${widget.detail.foodMenu[index].quantity}",
                                       style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 14,
                                         color: Color(0xFF3a3a3b),
                                       ),
                                       textAlign: TextAlign.left,
@@ -207,7 +207,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                                     Text(
                                       "${widget.detail.foodMenu[index].price} ฿",
                                       style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 14,
                                         color: Color(0xFF3a3a3b),
                                       ),
                                       textAlign: TextAlign.left,
@@ -225,7 +225,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                                 Text(
                                   "Food Price Total",
                                   style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 14,
                                     color: Color(0xFF3a3a3b),
                                   ),
                                   textAlign: TextAlign.left,
@@ -233,7 +233,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                                 Text(
                                   "${widget.detail.totalPrice} ฿",
                                   style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 14,
                                     color: Color(0xFF3a3a3b),
                                   ),
                                   textAlign: TextAlign.left,
@@ -249,7 +249,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                                 Text(
                                   "Calories Total",
                                   style: TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 14,
                                       color: Color(0xFF3a3a3b),
                                       fontWeight: FontWeight.w400),
                                   textAlign: TextAlign.left,
@@ -257,7 +257,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                                 Text(
                                   "${cal_total.toString()} kcal",
                                   style: TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 14,
                                       color: Color(0xFF3a3a3b),
                                       fontWeight: FontWeight.w400),
                                   textAlign: TextAlign.left,
@@ -272,8 +272,9 @@ class _DetailHistoryState extends State<DetailHistory> {
                               children: <Widget>[
                                 Text(
                                   "Average Calory for a person",
+                                  maxLines: 3,
                                   style: TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 14,
                                       color: Color(0xFF3a3a3b),
                                       fontWeight: FontWeight.w400),
                                   textAlign: TextAlign.left,
@@ -281,7 +282,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                                 Text(
                                   "${widget.detail.averageCalories} kcal",
                                   style: TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 14,
                                       color: Color(0xFF3a3a3b),
                                       fontWeight: FontWeight.w400),
                                   textAlign: TextAlign.left,
