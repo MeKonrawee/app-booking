@@ -272,6 +272,7 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                                 ),
                                 Text(
                                   "${widget.orderFood.avgCal.toStringAsFixed(2)} kcal",
+                                  maxLines: 2,
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: Color(0xFF3a3a3b),
