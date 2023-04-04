@@ -48,6 +48,7 @@ class PopularFoodTiles extends StatelessWidget {
           Container(
             padding: EdgeInsets.only(left: 10, right: 5, top: 5, bottom: 5),
             child: Card(
+                shadowColor: Color.fromARGB(255, 245, 212, 223),
                 color: Colors.white,
                 elevation: 0,
                 shape: RoundedRectangleBorder(
@@ -71,16 +72,6 @@ class PopularFoodTiles extends StatelessWidget {
                               child: Container(
                                 height: 28,
                                 width: 28,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.white70,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Color(0xFFfae3e2),
-                                        blurRadius: 25.0,
-                                        offset: Offset(0.0, 0.75),
-                                      ),
-                                    ]),
                               ),
                             ),
                           ),
@@ -115,16 +106,6 @@ class PopularFoodTiles extends StatelessWidget {
                             child: Container(
                               height: 28,
                               width: 28,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white70,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Color(0xFFfae3e2),
-                                      blurRadius: 25.0,
-                                      offset: Offset(0.0, 0.75),
-                                    ),
-                                  ]),
                             ),
                           ),
                         ],
