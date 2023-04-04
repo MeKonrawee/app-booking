@@ -54,7 +54,7 @@ class _BookTableWidgetState extends State<BookTableWidget> {
                 List<TableResponse> carouselCard = snapshot.data;
                 carouselCard.sort((a, b) => a.id.compareTo(b.id));
                 return Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: MasonryGridView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
