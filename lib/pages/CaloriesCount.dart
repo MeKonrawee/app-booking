@@ -81,7 +81,7 @@ class _CaloriesCountState extends State<CaloriesCount> {
                       "Calories",
                       style: TextStyle(
                           fontFamily: 'Kanit',
-                          fontSize: 10.0,
+                          fontSize: 12.0,
                           fontWeight: FontWeight.normal,
                           color: Colors.black),
                     ),
@@ -95,7 +95,7 @@ class _CaloriesCountState extends State<CaloriesCount> {
                       "Recommend",
                       style: TextStyle(
                           fontFamily: 'Kanit',
-                          fontSize: 10.0,
+                          fontSize: 12.0,
                           fontWeight: FontWeight.normal,
                           color: Colors.black),
                     ),
@@ -301,25 +301,6 @@ class _CaloriesCountState extends State<CaloriesCount> {
                                       }
                                     },
                                   )
-                                // Container(
-                                //     alignment: Alignment.topCenter,
-                                //     color: Colors.black,
-                                //     height: 300,
-                                //     child: GridView.builder(
-
-                                //       physics: NeverScrollableScrollPhysics(),
-                                //       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                                //         maxCrossAxisExtent: 200,
-                                //         childAspectRatio: 3 / 3.7,
-                                //         crossAxisSpacing: 20,
-                                //         mainAxisSpacing: 20,
-                                //       ),
-                                //       itemCount: 4,
-                                //       itemBuilder: (context, index) {
-                                //         return BoxItemFood(idFood: index);
-                                //       },
-                                //     ),
-                                //   )
                                 : SizedBox()
                             // SearchWidget(),
                             // PopularFoodsWidget(),
@@ -366,7 +347,7 @@ class _CaloriesCountState extends State<CaloriesCount> {
                                 children: [
                                   Icon(Icons.info_outline),
                                   Text(
-                                      "กรุณาเลือก Tdee ก่อนถึงจะคำนวณอาหารมื้อถัดไป"),
+                                      "Select A TDEE First for Next Meal Recommendation"),
                                 ],
                               ),
                             ),

@@ -22,6 +22,7 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   TextEditingController username = new TextEditingController();
   TextEditingController password = new TextEditingController();
+  bool passwordHidden = true;
 
   void session() async {
     var checkSession = await SessionManager().get("user");
@@ -100,6 +101,7 @@ class _SignInPageState extends State<SignInPage> {
                     height: 15,
                   ),
                   TextField(
+                    obscureText: passwordHidden,
                     showCursor: true,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -115,10 +117,19 @@ class _SignInPageState extends State<SignInPage> {
                         color: Color(0xFF666666),
                         size: defaultIconSize,
                       ),
-                      suffixIcon: Icon(
-                        Icons.remove_red_eye,
-                        color: Color(0xFF666666),
-                        size: defaultIconSize,
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          passwordHidden
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: Color(0xFF666666),
+                          size: defaultIconSize,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            passwordHidden = !passwordHidden;
+                          });
+                        },
                       ),
                       fillColor: Color(0xFFF2F3F5),
                       hintStyle: TextStyle(

@@ -35,8 +35,14 @@ dependencies:
   otp_text_field: ^1.1.3
 
 dev_dependencies:
+  flutter_launcher_icons: "^0.12.0"
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: true
+  image_path: "assets/images/menus/kyp.png"
+  min_sdk_android: 16
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -64,33 +70,9 @@ flutter:
     - assets/images/menus/ic_home.png
     - assets/images/menus/ic_delete.png
     - assets/images/menus/ic_near_by.png
-    - assets/images/menus/ic_credit_card.png
     - assets/images/menus/ic_app_icon.png
     - assets/images/menus/ic_food_express.png
     - assets/images/menus/ic_app_icon_black.png
-    - assets/images/topmenu/ic_burger.png
-    - assets/images/topmenu/ic_cake.png
-    - assets/images/topmenu/ic_ice_cream.png
-    - assets/images/topmenu/ic_pasta.png
-    - assets/images/topmenu/ic_pizza.png
-    - assets/images/topmenu/ic_sushi.png
-    - assets/images/topmenu/ic_soft_drink.png
-    - assets/images/popular_foods/ic_popular_food_1.png
-    - assets/images/popular_foods/ic_popular_food_2.png
-    - assets/images/popular_foods/ic_popular_food_3.png
-    - assets/images/popular_foods/ic_popular_food_4.png
-    - assets/images/popular_foods/ic_popular_food_5.png
-    - assets/images/popular_foods/ic_popular_food_6.png
-    - assets/images/bestfood/ic_best_food_1.jpeg
-    - assets/images/bestfood/ic_best_food_2.jpeg
-    - assets/images/bestfood/ic_best_food_3.jpeg
-    - assets/images/bestfood/ic_best_food_4.jpeg
-    - assets/images/bestfood/ic_best_food_5.jpeg
-    - assets/images/bestfood/ic_best_food_6.jpeg
-    - assets/images/bestfood/ic_best_food_7.jpeg
-    - assets/images/bestfood/ic_best_food_8.jpeg
-    - assets/images/bestfood/ic_best_food_9.jpeg
-    - assets/images/bestfood/ic_best_food_10.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

@@ -105,7 +105,7 @@ class PopularFoodTiles extends StatelessWidget {
                               child: Text(name,
                                   style: TextStyle(
                                       color: Color(0xFF6e6e71),
-                                      fontSize: 15,
+                                      fontSize: 12,
                                       fontWeight: FontWeight.w500)),
                             ),
                           ),
@@ -152,7 +152,7 @@ class PopularFoodTiles extends StatelessWidget {
                             child: Text('฿' + price,
                                 style: TextStyle(
                                     color: Color.fromARGB(255, 218, 61, 13),
-                                    fontSize: 12,
+                                    fontSize: 10,
                                     fontWeight: FontWeight.w600)),
                           )
                         ],
@@ -177,7 +177,7 @@ class AllMenuFood extends StatelessWidget {
           Text(
             "All Menus",
             style: TextStyle(
-                fontSize: 20,
+                fontSize: 18,
                 color: Color(0xFF3a3a3b),
                 fontWeight: FontWeight.w300),
           ),

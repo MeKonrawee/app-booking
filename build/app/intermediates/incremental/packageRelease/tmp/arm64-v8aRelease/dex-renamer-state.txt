@@ -1,0 +1,4 @@
+#Tue Apr 04 11:37:53 ICT 2023
+base.0=D\:\\Korn-Yapa\\build\\app\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

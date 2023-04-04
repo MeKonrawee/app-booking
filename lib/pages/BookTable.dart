@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/animation/ScaleRoute.dart';
-import 'package:flutter_app/pages/SignInPage.dart';
 import 'package:flutter_app/widgets/BookTableWidget.dart';
 
 class BookTable extends StatefulWidget {

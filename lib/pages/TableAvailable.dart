@@ -108,12 +108,13 @@ class BookTableTiles extends StatelessWidget {
                   status
                       ? 'assets/images/Table/table.png'
                       : 'assets/images/Table/untable.png',
-                  height: 70,
+                  height: 60,
+                  width: 60,
                 ),
                 Text(name,
                     style: TextStyle(
                         color: Color(0xFF6e6e71),
-                        fontSize: 14,
+                        fontSize: 12,
                         fontWeight: FontWeight.w400)),
               ],
             )),
@@ -123,54 +124,6 @@ class BookTableTiles extends StatelessWidget {
     );
   }
 }
-
-// InkWell(
-//       onTap: func,
-//       child: Column(
-//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//         children: <Widget>[
-//           Container(
-//             padding: EdgeInsets.only(left: 20, right: 5, top: 10, bottom: 1),
-//             // decoration: new BoxDecoration(boxShadow: [
-//             //   new BoxShadow(
-//             //     color: Color(0xFFfae3e2),
-//             //     blurRadius: 25.0,
-//             //     offset: Offset(0.0, 0.75),
-//             //   ),
-//             // ]),
-//             child: Card(
-//                 color: Colors.white,
-//                 elevation: 0,
-//                 shape: RoundedRectangleBorder(
-//                   borderRadius: const BorderRadius.all(
-//                     Radius.circular(3.0),
-//                   ),
-//                 ),
-//                 child: Container(
-//                   width: 60,
-//                   height: 60,
-//                   child: Center(
-//                       child: Image.asset(
-//                     'assets/images/Table/' + imageUrl + ".png",
-//                     width: 50,
-//                     height: 50,
-//                   )),
-//                 )),
-//           ),
-//           Padding(
-//             padding: EdgeInsets.only(
-//               left: 20,
-//               right: 5,
-//             ),
-//             child: Text(name,
-//                 style: TextStyle(
-//                     color: Color(0xFF6e6e71),
-//                     fontSize: 14,
-//                     fontWeight: FontWeight.w400)),
-//           ),
-//         ],
-//       ),
-//     );
 
 class TableAvailableTitle extends StatelessWidget {
   @override
@@ -183,7 +136,7 @@ class TableAvailableTitle extends StatelessWidget {
           Text(
             "Table Status for Booking",
             style: TextStyle(
-                fontSize: 20,
+                fontSize: 18,
                 color: Color(0xFF3a3a3b),
                 fontWeight: FontWeight.w300),
           ),

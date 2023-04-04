@@ -101,7 +101,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                         height: 7,
                       ),
                       Text(
-                        "Person Number : ${widget.detail.personNumber}",
+                        "Customer Amounts : ${widget.detail.personNumber} People",
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,

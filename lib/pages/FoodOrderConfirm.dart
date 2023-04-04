@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/common/button.dart';
 import 'package:flutter_app/models/bookingDetail_Model.dart';
 import 'package:flutter_app/models/response/booking_response.dart';
-import 'package:flutter_app/pages/FoodHistory.dart';
 import 'package:flutter_app/pages/mainScreen.dart';
 import 'package:flutter_app/services/booking_services.dart';
 
@@ -91,7 +90,7 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                         height: 7,
                       ),
                       Text(
-                        "Person Number : ${widget.orderFood.people}",
+                        "Customer Amounts : ${widget.orderFood.people}",
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,

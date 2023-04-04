@@ -26,7 +26,7 @@
 24        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 24-->[androidx.core:core:1.6.0] C:\Users\ASUS\.gradle\caches\transforms-3\941ea981a7ab334fbfc9e648f12266a4\transformed\core-1.6.0\AndroidManifest.xml:24:18-86
 25        android:debuggable="true"
-26        android:icon="@mipmap/ic_launcher"
+26        android:icon="@mipmap/launcher_icon"
 27        android:label="flutter_app" >
 28        <activity
 29            android:name="com.example.flutter_app.MainActivity"

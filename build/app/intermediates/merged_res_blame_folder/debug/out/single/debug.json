@@ -4,6 +4,14 @@
         "source": "D:\\Korn-Yapa\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
     },
     {
+        "merged": "D:\\Korn-Yapa\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_launcher_icon.png.flat",
+        "source": "D:\\Korn-Yapa\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\launcher_icon.png"
+    },
+    {
+        "merged": "D:\\Korn-Yapa\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_launcher_icon.png.flat",
+        "source": "D:\\Korn-Yapa\\android\\app\\src\\main\\res\\mipmap-xhdpi\\launcher_icon.png"
+    },
+    {
         "merged": "D:\\Korn-Yapa\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
         "source": "D:\\Korn-Yapa\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
     },
@@ -18,6 +26,18 @@
     {
         "merged": "D:\\Korn-Yapa\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
         "source": "D:\\Korn-Yapa\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\Korn-Yapa\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-hdpi_launcher_icon.png.flat",
+        "source": "D:\\Korn-Yapa\\android\\app\\src\\main\\res\\mipmap-hdpi\\launcher_icon.png"
+    },
+    {
+        "merged": "D:\\Korn-Yapa\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-mdpi_launcher_icon.png.flat",
+        "source": "D:\\Korn-Yapa\\android\\app\\src\\main\\res\\mipmap-mdpi\\launcher_icon.png"
+    },
+    {
+        "merged": "D:\\Korn-Yapa\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_launcher_icon.png.flat",
+        "source": "D:\\Korn-Yapa\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\launcher_icon.png"
     },
     {
         "merged": "D:\\Korn-Yapa\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",

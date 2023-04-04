@@ -338,7 +338,7 @@ class TotalCalculationWidget extends StatelessWidget {
           child: Column(
             children: <Widget>[
               SizedBox(
-                height: 15,
+                height: 10,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -346,7 +346,7 @@ class TotalCalculationWidget extends StatelessWidget {
                   Text(
                     "Food Price Total",
                     style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 14,
                         color: Color(0xFF3a3a3b),
                         fontWeight: FontWeight.w600),
                     textAlign: TextAlign.left,
@@ -354,7 +354,7 @@ class TotalCalculationWidget extends StatelessWidget {
                   Text(
                     "${price} ฿",
                     style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 14,
                         color: Color(0xFF3a3a3b),
                         fontWeight: FontWeight.w600),
                     textAlign: TextAlign.left,
@@ -362,7 +362,7 @@ class TotalCalculationWidget extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 10,
+                height: 7,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -370,7 +370,7 @@ class TotalCalculationWidget extends StatelessWidget {
                   Text(
                     "Calories Total",
                     style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 14,
                         color: Color(0xFF3a3a3b),
                         fontWeight: FontWeight.w400),
                     textAlign: TextAlign.left,
@@ -378,7 +378,31 @@ class TotalCalculationWidget extends StatelessWidget {
                   Text(
                     "${cal_total} kcal",
                     style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 14,
+                        color: Color(0xFF3a3a3b),
+                        fontWeight: FontWeight.w400),
+                    textAlign: TextAlign.left,
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 7,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    "Average Calory for a person",
+                    style: TextStyle(
+                        fontSize: 14,
+                        color: Color(0xFF3a3a3b),
+                        fontWeight: FontWeight.w400),
+                    textAlign: TextAlign.left,
+                  ),
+                  Text(
+                    "${average_cal.toStringAsFixed(2)} kcal",
+                    style: TextStyle(
+                        fontSize: 14,
                         color: Color(0xFF3a3a3b),
                         fontWeight: FontWeight.w400),
                     textAlign: TextAlign.left,
@@ -387,30 +411,6 @@ class TotalCalculationWidget extends StatelessWidget {
               ),
               SizedBox(
                 height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    "Average Calory for a person",
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: Color(0xFF3a3a3b),
-                        fontWeight: FontWeight.w400),
-                    textAlign: TextAlign.left,
-                  ),
-                  Text(
-                    "${average_cal.toStringAsFixed(2)} kcal",
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: Color(0xFF3a3a3b),
-                        fontWeight: FontWeight.w400),
-                    textAlign: TextAlign.left,
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 15,
               ),
             ],
           ),
@@ -462,7 +462,7 @@ class CartItem extends StatelessWidget {
           ),
           child: Container(
             alignment: Alignment.center,
-            padding: EdgeInsets.only(left: 5, right: 5, top: 10, bottom: 10),
+            padding: EdgeInsets.only(left: 5, right: 5, top: 5, bottom: 5),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -480,7 +480,7 @@ class CartItem extends StatelessWidget {
                           child: Text(
                             "$productName",
                             style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                                 color: Color(0xFF3a3a3b),
                                 fontWeight: FontWeight.w400),
                             textAlign: TextAlign.left,
@@ -493,7 +493,7 @@ class CartItem extends StatelessWidget {
                           child: Text(
                             "$productPrice",
                             style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                                 color: Color(0xFF3a3a3b),
                                 fontWeight: FontWeight.w400),
                             textAlign: TextAlign.left,
@@ -506,7 +506,7 @@ class CartItem extends StatelessWidget {
                           child: Text(
                             "$productCalory",
                             style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                                 color: Color(0xFF3a3a3b),
                                 fontWeight: FontWeight.w400),
                             textAlign: TextAlign.left,
@@ -515,7 +515,7 @@ class CartItem extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                      width: 40,
+                      width: 60,
                     ),
                     GestureDetector(
                       onTap: funcDel,
@@ -628,7 +628,7 @@ class AddToCartMenu extends StatelessWidget {
                   style: new TextStyle(
                       fontSize: 12.0,
                       color: Colors.white,
-                      fontWeight: FontWeight.w300),
+                      fontWeight: FontWeight.w500),
                 ),
               ),
             ),

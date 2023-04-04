@@ -198,7 +198,7 @@ class BoxItemFood extends StatelessWidget {
                 style: TextStyle(
                   color: Color.fromARGB(255, 32, 32, 32),
                   fontFamily: defaultFontFamily,
-                  fontSize: 14,
+                  fontSize: 12,
                 ),
               ),
               SizedBox(
@@ -209,7 +209,7 @@ class BoxItemFood extends StatelessWidget {
                 style: TextStyle(
                   color: Color.fromARGB(255, 32, 32, 32),
                   fontFamily: defaultFontFamily,
-                  fontSize: 14,
+                  fontSize: 12,
                 ),
               ),
               SizedBox(
@@ -220,7 +220,7 @@ class BoxItemFood extends StatelessWidget {
                 style: TextStyle(
                   color: Color.fromARGB(255, 32, 32, 32),
                   fontFamily: defaultFontFamily,
-                  fontSize: 14,
+                  fontSize: 12,
                 ),
               ),
             ],
