@@ -1017,9 +1017,9 @@ kotlinx.coroutines.channels.ChannelsKt__DeprecatedKt$lastIndexOf$1
 kotlin.jvm.internal.LocalVariableReferencesKt
 androidx.core.os.LocaleListInterface
 kotlin.random.URandomKt
+androidx.webkit.R$styleable
 io.flutter.plugins.webviewflutter.InputAwareWebView:
     private static final java.lang.String TAG
-androidx.webkit.R$styleable
 kotlin.jvm.internal.LongSpreadBuilder
 kotlinx.coroutines.channels.ChannelCoroutine
 kotlin.jvm.internal.ArrayIteratorKt
@@ -8749,6 +8749,6 @@ androidx.core.content.res.ResourcesCompat:
     private static final java.lang.ThreadLocal sTempTypedValue
     private static final java.util.WeakHashMap sColorStateCaches
     private static final java.lang.Object sColorStateCacheLock
-io.flutter.plugin.platform.PlatformView$-CC
 io.flutter.view.TextureRegistry$SurfaceTextureEntry$-CC
+io.flutter.plugin.platform.PlatformView$-CC
 io.flutter.plugin.common.BinaryMessenger$-CC
