@@ -36,8 +36,9 @@ class _TableAvailableState extends State<TableAvailable> {
               future: TablesService.getTables(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
-                  List<TableResponse> carouselCard = snapshot.data;
-                  carouselCard.sort((a, b) => a.id.compareTo(b.id));
+                  List<TableResponse> tableList = snapshot.data;
+                  tableList.sort((a, b) => a.number.compareTo(b.number));
+
                   return Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: MasonryGridView.builder(
@@ -49,14 +50,14 @@ class _TableAvailableState extends State<TableAvailable> {
                       ),
                       crossAxisSpacing: 20,
                       mainAxisSpacing: 20,
-                      itemCount: carouselCard.length,
+                      itemCount: tableList.length,
                       itemBuilder: (context, index) {
                         return BookTableTiles(
-                          name: carouselCard[index].number,
-                          status: carouselCard[index].status,
-                          func: carouselCard[index].status
+                          name: tableList[index].number,
+                          status: tableList[index].status,
+                          func: tableList[index].status
                               ? () {
-                                  nameTable = carouselCard[index].number;
+                                  nameTable = tableList[index].number;
                                   Navigator.push(
                                     context,
                                     ScaleRoute(

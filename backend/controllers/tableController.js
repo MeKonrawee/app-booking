@@ -10,15 +10,15 @@ const getTable = async (req, res, next) => {
     const data = await table.get();
     const tableArray = [];
     if (data.empty) {
-      return res.status(404).json("No menu found");
+      return res.status(404).json("No Table found");
     } else {
       data.forEach((doc) => {
-        const menu = new TableResponse(
+        const tables = new TableResponse(
           doc.id,
           doc.data().number,
           doc.data().status
         );
-        tableArray.push(menu);
+        tableArray.push(tables);
       });
       return res.status(200).json(tableArray);
     }
