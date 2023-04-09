@@ -13,7 +13,6 @@ class DetailHistory extends StatefulWidget {
 class _DetailHistoryState extends State<DetailHistory> {
   String time;
   String date;
-  String value;
   int cal_total = 0;
 
   void cal() async {
@@ -135,7 +134,7 @@ class _DetailHistoryState extends State<DetailHistory> {
                         height: 7,
                       ),
                       Text(
-                        "Booking time : ${value}",
+                        "Booking time : ${widget.detail.timeValue}",
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,

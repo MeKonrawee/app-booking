@@ -119,6 +119,9 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                           fontSize: 14,
                         ),
                       ),
+                      SizedBox(
+                        height: 7,
+                      ),
                       Text(
                         "Booking Time : ${widget.orderFood.timeValue}",
                         style: TextStyle(
