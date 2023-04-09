@@ -391,13 +391,13 @@ androidx.core.app.ComponentActivity:
     private androidx.collection.SimpleArrayMap mExtraDataMap
     private androidx.lifecycle.LifecycleRegistry mLifecycleRegistry
 kotlin.jvm.internal.ArrayIntIterator
-kotlinx.coroutines.channels.ChannelsKt__ChannelsKt$sendBlocking$1
 kotlinx.coroutines.scheduling.TasksKt:
     public static final boolean isBlocking(kotlinx.coroutines.scheduling.Task)
     public static final java.lang.String DEFAULT_DISPATCHER_NAME
     public static final java.lang.String DEFAULT_SCHEDULER_NAME
     public static final int TASK_NON_BLOCKING
     public static final int TASK_PROBABLY_BLOCKING
+kotlinx.coroutines.channels.ChannelsKt__ChannelsKt$sendBlocking$1
 androidx.core.view.ScrollingView
 kotlin.coroutines.CombinedContext$Serialized
 androidx.core.graphics.BlendModeUtils$1
@@ -1017,9 +1017,9 @@ kotlinx.coroutines.channels.ChannelsKt__DeprecatedKt$lastIndexOf$1
 kotlin.jvm.internal.LocalVariableReferencesKt
 androidx.core.os.LocaleListInterface
 kotlin.random.URandomKt
-androidx.webkit.R$styleable
 io.flutter.plugins.webviewflutter.InputAwareWebView:
     private static final java.lang.String TAG
+androidx.webkit.R$styleable
 kotlin.jvm.internal.LongSpreadBuilder
 kotlinx.coroutines.channels.ChannelCoroutine
 kotlin.jvm.internal.ArrayIteratorKt
@@ -3863,9 +3863,9 @@ kotlin.sequences.GeneratorSequence
 kotlin.sequences.SequencesKt__SequenceBuilderKt$sequence$$inlined$Sequence$1
 androidx.customview.widget.ExploreByTouchHelper
 androidx.annotation.CheckResult
-io.flutter.embedding.engine.systemchannels.PlatformViewsChannel:
-    private static final java.lang.String TAG
 io.flutter.embedding.engine.systemchannels.PlatformChannel:
+    private static final java.lang.String TAG
+io.flutter.embedding.engine.systemchannels.PlatformViewsChannel:
     private static final java.lang.String TAG
 kotlinx.coroutines.flow.FlowKt__ReduceKt$single$$inlined$collect$1
 kotlin.Suppress
@@ -8749,6 +8749,6 @@ androidx.core.content.res.ResourcesCompat:
     private static final java.lang.ThreadLocal sTempTypedValue
     private static final java.util.WeakHashMap sColorStateCaches
     private static final java.lang.Object sColorStateCacheLock
-io.flutter.view.TextureRegistry$SurfaceTextureEntry$-CC
 io.flutter.plugin.platform.PlatformView$-CC
 io.flutter.plugin.common.BinaryMessenger$-CC
+io.flutter.view.TextureRegistry$SurfaceTextureEntry$-CC

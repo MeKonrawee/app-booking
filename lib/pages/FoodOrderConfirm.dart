@@ -198,12 +198,15 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        "${menu.name} x${menu.quantity}",
-                                        maxLines: 2,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          color: Color(0xFF3a3a3b),
+                                      Flexible(
+                                        child: Text(
+                                          "${menu.name} x${menu.quantity}",
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: Color(0xFF3a3a3b),
+                                          ),
                                         ),
                                       ),
                                       Text(

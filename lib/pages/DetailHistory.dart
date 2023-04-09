@@ -199,13 +199,17 @@ class _DetailHistoryState extends State<DetailHistory> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
-                                    Text(
-                                      "${widget.detail.foodMenu[index].name} x${widget.detail.foodMenu[index].quantity}",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Color(0xFF3a3a3b),
+                                    Flexible(
+                                      child: Text(
+                                        "${widget.detail.foodMenu[index].name} x${widget.detail.foodMenu[index].quantity}",
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Color(0xFF3a3a3b),
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        textAlign: TextAlign.left,
                                       ),
-                                      textAlign: TextAlign.left,
                                     ),
                                     Text(
                                       "${widget.detail.foodMenu[index].price} ฿",

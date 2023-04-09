@@ -23,8 +23,8 @@
 19-->[androidx.core:core:1.6.0] C:\Users\ASUS\.gradle\caches\transforms-3\941ea981a7ab334fbfc9e648f12266a4\transformed\core-1.6.0\AndroidManifest.xml:24:18-86
 20        android:icon="@mipmap/launcher_icon"
 20-->D:\Korn-Yapa\android\app\src\main\AndroidManifest.xml:11:9-45
-21        android:label="flutter_app" >
-21-->D:\Korn-Yapa\android\app\src\main\AndroidManifest.xml:10:9-36
+21        android:label="KYP FooD" >
+21-->D:\Korn-Yapa\android\app\src\main\AndroidManifest.xml:10:9-33
 22        <activity
 22-->D:\Korn-Yapa\android\app\src\main\AndroidManifest.xml:12:9-23:20
 23            android:name="com.example.flutter_app.MainActivity"

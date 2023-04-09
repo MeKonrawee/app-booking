@@ -482,8 +482,11 @@ class CartItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Container(
+                          width: 200,
+                          height: 22,
                           child: Text(
                             "$productName",
+                            overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 fontSize: 14,
                                 color: Color(0xFF3a3a3b),

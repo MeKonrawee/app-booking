@@ -10,7 +10,7 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\AS
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.6.0] C:\Users\ASUS\.gradle\caches\transforms-3\941ea981a7ab334fbfc9e648f12266a4\transformed\core-1.6.0\AndroidManifest.xml:24:18-86
 	android:label
-		ADDED from D:\Korn-Yapa\android\app\src\main\AndroidManifest.xml:10:9-36
+		ADDED from D:\Korn-Yapa\android\app\src\main\AndroidManifest.xml:10:9-33
 	android:icon
 		ADDED from D:\Korn-Yapa\android\app\src\main\AndroidManifest.xml:11:9-45
 	android:name
