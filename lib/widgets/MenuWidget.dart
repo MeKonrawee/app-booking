@@ -15,7 +15,9 @@ import '../themes/constant.dart';
 class MenuWidget extends StatefulWidget {
   int people;
   String table;
-  MenuWidget(@required this.people, @required this.table);
+  String timeValue;
+  MenuWidget(
+      @required this.people, @required this.table, @required this.timeValue);
   @override
   _MenuWidgetState createState() => _MenuWidgetState();
 }
@@ -98,7 +100,8 @@ class _MenuWidgetState extends State<MenuWidget> {
                   await Navigator.push(
                     context,
                     ScaleRoute(
-                      page: FoodOrderPage(widget.people, widget.table),
+                      page: FoodOrderPage(
+                          widget.people, widget.table, widget.timeValue),
                     ),
                   );
                   setState(() {});

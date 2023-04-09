@@ -311,6 +311,7 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                   foodMenu: widget.orderFood.foodList,
                   fullName: widget.orderFood.fullname,
                   personNumber: widget.orderFood.people.toString(),
+                  timeValue: widget.orderFood.timeValue,
                   tableNumber: widget.orderFood.tableName,
                   tel: widget.orderFood.phone,
                   totalPrice: double.parse(

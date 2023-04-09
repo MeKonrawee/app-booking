@@ -15,7 +15,9 @@ import '../themes/constant.dart';
 class FoodOrderPage extends StatefulWidget {
   int people;
   String table;
-  FoodOrderPage(@required this.people, @required this.table);
+  String timeValue;
+  FoodOrderPage(
+      @required this.people, @required this.table, @required this.timeValue);
   @override
   _FoodOrderPageState createState() => _FoodOrderPageState();
 }
@@ -280,6 +282,7 @@ class _FoodOrderPageState extends State<FoodOrderPage> {
                         people: widget.people,
                         dateBook: dateBook,
                         timeBook: timeBook,
+                        timeValue: widget.timeValue,
                         foodList: foodPriceMenu,
                         totalAllPrice: price,
                         cal: cal_total,
