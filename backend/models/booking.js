@@ -7,6 +7,7 @@ class BookingResponse {
     table_number,
     tel,
     date,
+    time_value,
     quantity
   ) {
     this.id = id;
@@ -16,6 +17,7 @@ class BookingResponse {
     this.table_number = table_number;
     this.tel = tel;
     this.date = date;
+    this.time_value = time_value;
     this.quantity = quantity;
   }
 }

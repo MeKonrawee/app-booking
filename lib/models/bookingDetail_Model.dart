@@ -17,6 +17,7 @@ class BookingDetailModel {
     @required this.people,
     @required this.dateBook,
     @required this.timeBook,
+    @required this.timeValue,
     @required this.foodList,
     @required this.totalAllPrice,
     @required this.cal,
@@ -29,6 +30,7 @@ class BookingDetailModel {
   int people;
   String dateBook;
   String timeBook;
+  String timeValue;
   List<FoodMenu> foodList;
   int totalAllPrice;
   int cal;
@@ -42,6 +44,7 @@ class BookingDetailModel {
         people: json["people"],
         dateBook: json["dateBook"],
         timeBook: json["timeBook"],
+        timeValue: json["timeValue"],
         foodList: List<FoodMenu>.from(
             json["foodList"].map((x) => FoodMenu.fromJson(x))),
         totalAllPrice: json["totalAllPrice"],
@@ -56,6 +59,7 @@ class BookingDetailModel {
         "people": people,
         "dateBook": dateBook,
         "timeBook": timeBook,
+        "timeValue": timeValue,
         "foodList": List<dynamic>.from(foodList.map((x) => x.toJson())),
         "totalAllPrice": totalAllPrice,
         "cal": cal,

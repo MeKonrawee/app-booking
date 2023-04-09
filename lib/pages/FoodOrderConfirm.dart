@@ -119,6 +119,14 @@ class _FoodOrderConfirmState extends State<FoodOrderConfirm> {
                           fontSize: 14,
                         ),
                       ),
+                      Text(
+                        "Booking Time : ${widget.orderFood.timeValue}",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 32, 32, 32),
+                          fontFamily: defaultFontFamily,
+                          fontSize: 14,
+                        ),
+                      ),
                     ],
                   ),
                 ),

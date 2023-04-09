@@ -15,6 +15,7 @@ class HistoryModel {
         @required this.tableNumber,
         @required this.tel,
         @required this.date,
+        @required this.timeValue,
         @required this.totalPrice,
         @required this.averageCalories,
     });
@@ -26,6 +27,7 @@ class HistoryModel {
     String tableNumber;
     String tel;
     String date;
+    String timeValue;
     int totalPrice;
     int averageCalories;
 
@@ -37,6 +39,7 @@ class HistoryModel {
         tableNumber: json["table_number"],
         tel: json["tel"],
         date: json["date"],
+        timeValue: json["time_value"],
         totalPrice: json["total_price"],
         averageCalories: json["average_calories"],
     );
@@ -49,6 +52,7 @@ class HistoryModel {
         "table_number": tableNumber,
         "tel": tel,
         "date": date,
+        "time_value": timeValue,
         "total_price": totalPrice,
         "average_calories": averageCalories,
     };

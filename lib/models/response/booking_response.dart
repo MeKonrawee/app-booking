@@ -21,6 +21,7 @@ class BookingModel {
     @required this.tableNumber,
     @required this.tel,
     @required this.date,
+    @required this.timeValue,
     @required this.totalPrice,
     @required this.averageCalories,
   });
@@ -32,6 +33,7 @@ class BookingModel {
   String tableNumber;
   String tel;
   String date;
+  String timeValue;
   double totalPrice;
   int averageCalories;
 
@@ -44,6 +46,7 @@ class BookingModel {
         tableNumber: json["table_number"],
         tel: json["tel"],
         date: json["date"],
+        timeValue: json["timeValue"],
         totalPrice: json["total_price"]?.toDouble(),
         averageCalories: json["average_calories"],
       );
@@ -56,6 +59,7 @@ class BookingModel {
         "table_number": tableNumber,
         "tel": tel,
         "date": date,
+        "timeValue": timeValue,
         "total_price": totalPrice,
         "average_calories": averageCalories,
       };

@@ -13,6 +13,7 @@ class DetailHistory extends StatefulWidget {
 class _DetailHistoryState extends State<DetailHistory> {
   String time;
   String date;
+  String value;
   int cal_total = 0;
 
   void cal() async {
@@ -124,6 +125,17 @@ class _DetailHistoryState extends State<DetailHistory> {
                       ),
                       Text(
                         "Booking date : ${date}",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 32, 32, 32),
+                          fontFamily: defaultFontFamily,
+                          fontSize: 14,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 7,
+                      ),
+                      Text(
+                        "Booking time : ${value}",
                         style: TextStyle(
                           color: Color.fromARGB(255, 32, 32, 32),
                           fontFamily: defaultFontFamily,

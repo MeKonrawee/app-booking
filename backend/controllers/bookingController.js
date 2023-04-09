@@ -20,7 +20,8 @@ const getBooking = async (req, res, next) => {
           doc.data().person_number,
           doc.data().table_number,
           doc.data().tel,
-          doc.data().date
+          doc.data().date,
+          doc.data().time_value
         );
         tableArray.push(menu);
       });
@@ -76,6 +77,7 @@ const getHistory = async (req, res, next) => {
             table_number: doc.data().table_number,
             tel: doc.data().tel,
             date: doc.data().date,
+            time_value: doc.data().time_value,
             total_price: doc.data().total_price,
             average_calories: doc.data().average_calories,
           };

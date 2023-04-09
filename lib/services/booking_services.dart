@@ -18,6 +18,7 @@ class BookingServices {
         <String, dynamic>{
           "average_calories": resultData.averageCalories,
           "date": resultData.date,
+          "time_value": resultData.timeValue,
           "food_menu": resultData.foodMenu,
           "full_name": resultData.fullName,
           "person_number": resultData.personNumber,
