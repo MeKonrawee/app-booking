@@ -7,7 +7,6 @@ import 'package:flutter_app/models/response/booking_response.dart';
 import 'package:flutter_app/models/response/menu_response.dart';
 import 'package:flutter_app/pages/FoodOrderPage.dart';
 import 'package:flutter_app/services/menu_services.dart';
-import 'package:flutter_app/widgets/PopularFoodsWidget.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../themes/constant.dart';
