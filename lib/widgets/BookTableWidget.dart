@@ -372,8 +372,8 @@ class _BookTableWidgetState extends State<BookTableWidget> {
                                                 builder: (context) =>
                                                     MenuWidget(
                                                   int.parse(amount.text),
-                                                  timeValue.text,
                                                   nameTable,
+                                                  timeValue.text,
                                                 ),
                                               ),
                                             );
