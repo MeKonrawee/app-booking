@@ -34,13 +34,52 @@ class _HomePageState extends State<HomePage> {
                 color: Color(0xFF3a3737),
               ),
               onPressed: () async {
-                await SessionManager().remove("user");
-                Navigator.push(
-                  context,
-                  ScaleRoute(
-                    page: SignInPage(),
+                return showDialog(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: Text(
+                      "Notification",
+                      textAlign: TextAlign.center,
+                    ),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Do you want to Sign Out?",
+                        ),
+                      ],
+                    ),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(ctx).pop();
+                        },
+                        child: Text("Cancel"),
+                      ),
+                      TextButton(
+                        onPressed: () async {
+                          Navigator.of(ctx).pop();
+                          await SessionManager().remove("user");
+                          Navigator.push(
+                            context,
+                            ScaleRoute(
+                              page: SignInPage(),
+                            ),
+                          );
+                        },
+                        child: Text("Confirm"),
+                      ),
+                    ],
                   ),
                 );
+                // await SessionManager().remove("user");
+                // Navigator.push(
+                //   context,
+                //   ScaleRoute(
+                //     page: SignInPage(),
+                //   ),
+                // );
               })
         ],
       ),

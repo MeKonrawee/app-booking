@@ -22,6 +22,8 @@ class ChangePassworod extends StatefulWidget {
 class _ChangePassworodState extends State<ChangePassworod> {
   TextEditingController password = new TextEditingController();
   TextEditingController confirmpassword = new TextEditingController();
+  bool passwordHidden = true;
+  bool confirmHidden = true;
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +55,7 @@ class _ChangePassworodState extends State<ChangePassworod> {
                 ),
               ),
               TextField(
+                obscureText: passwordHidden,
                 showCursor: true,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -68,10 +71,17 @@ class _ChangePassworodState extends State<ChangePassworod> {
                     color: Color(0xFF666666),
                     size: defaultIconSize,
                   ),
-                  suffixIcon: Icon(
-                    Icons.remove_red_eye,
-                    color: Color(0xFF666666),
-                    size: defaultIconSize,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      passwordHidden ? Icons.visibility : Icons.visibility_off,
+                      color: Color(0xFF666666),
+                      size: defaultIconSize,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        passwordHidden = !passwordHidden;
+                      });
+                    },
                   ),
                   fillColor: Color(0xFFF2F3F5),
                   hintStyle: TextStyle(
@@ -87,6 +97,7 @@ class _ChangePassworodState extends State<ChangePassworod> {
                 height: 15,
               ),
               TextField(
+                obscureText: confirmHidden,
                 showCursor: true,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -102,10 +113,17 @@ class _ChangePassworodState extends State<ChangePassworod> {
                     color: Color(0xFF666666),
                     size: defaultIconSize,
                   ),
-                  suffixIcon: Icon(
-                    Icons.remove_red_eye,
-                    color: Color(0xFF666666),
-                    size: defaultIconSize,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      confirmHidden ? Icons.visibility : Icons.visibility_off,
+                      color: Color(0xFF666666),
+                      size: defaultIconSize,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        confirmHidden = !confirmHidden;
+                      });
+                    },
                   ),
                   fillColor: Color(0xFFF2F3F5),
                   hintStyle: TextStyle(

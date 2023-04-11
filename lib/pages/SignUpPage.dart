@@ -25,6 +25,7 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController weight = new TextEditingController();
   TextEditingController height = new TextEditingController();
   TextEditingController phonenumber = new TextEditingController();
+  bool passwordHidden = true;
 
   @override
   Widget build(BuildContext context) {
@@ -103,6 +104,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             height: 15,
                           ),
                           TextField(
+                            obscureText: passwordHidden,
                             showCursor: true,
                             decoration: InputDecoration(
                               contentPadding:
@@ -120,6 +122,20 @@ class _SignUpPageState extends State<SignUpPage> {
                                 Icons.password,
                                 color: Color(0xFF666666),
                                 size: defaultIconSize,
+                              ),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  passwordHidden
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: Color(0xFF666666),
+                                  size: defaultIconSize,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    passwordHidden = !passwordHidden;
+                                  });
+                                },
                               ),
                               fillColor: Color(0xFFF2F3F5),
                               hintStyle: TextStyle(
@@ -354,8 +370,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   keyboardType: TextInputType.number,
                                   inputFormatters: [
                                     FilteringTextInputFormatter.allow(
-                                      RegExp(r'[0-9]'),
-                                    ),
+                                        RegExp(r'[0-9]{0,2}$')),
                                   ],
                                   decoration: InputDecoration(
                                     contentPadding:
@@ -395,7 +410,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   keyboardType: TextInputType.number,
                                   inputFormatters: [
                                     FilteringTextInputFormatter.allow(
-                                      RegExp(r'[0-9]'),
+                                      RegExp(r'[0-9]{0,3}$'),
                                     ),
                                   ],
                                   decoration: InputDecoration(
@@ -436,7 +451,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             keyboardType: TextInputType.number,
                             inputFormatters: [
                               FilteringTextInputFormatter.allow(
-                                RegExp(r'[0-9]'),
+                                RegExp(r'[0-9]{0,10}$'),
                               ),
                             ],
                             decoration: InputDecoration(
