@@ -164,7 +164,7 @@ class _AccountCustomerState extends State<AccountCustomer> {
                       hint: Text(
                         "Gender",
                         style: TextStyle(
-                          color: Color(0xFF666666),
+                          color: Color.fromARGB(255, 14, 6, 6),
                           fontFamily: defaultFontFamily,
                           fontSize: defaultFontSize,
                         ),
@@ -280,6 +280,7 @@ class _AccountCustomerState extends State<AccountCustomer> {
               ]
             : [],
         decoration: InputDecoration(
+          labelStyle: TextStyle(color: Color.fromARGB(255, 115, 111, 111)),
           contentPadding: EdgeInsets.symmetric(vertical: 4.5, horizontal: 15),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -350,7 +351,8 @@ class BoxShowText extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
       ),
-      child: Text(text),
+      child: Text(text,
+          style: TextStyle(color: Color.fromARGB(255, 111, 118, 123))),
     );
   }
 }

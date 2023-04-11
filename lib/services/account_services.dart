@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter_app/models/response/account_response.dart';
 import 'package:http/http.dart' as http;
 
-import '../common/to_boolean.dart';
 import 'api.dart';
 
 class Accountservices {
@@ -57,6 +56,8 @@ class Accountservices {
           },
         ),
       );
+
+
 
       AccountModel resultAccount = accountModelFromJson(result.body);
       return resultAccount;
