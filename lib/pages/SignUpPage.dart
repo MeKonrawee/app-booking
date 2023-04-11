@@ -4,11 +4,11 @@ import 'package:flutter_app/animation/ScaleRoute.dart';
 import 'package:flutter_app/pages/SignInPage.dart';
 import 'package:flutter_app/widgets/ListDataDropdown.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../common/button.dart';
 import '../themes/constant.dart';
 import '../services/account_services.dart';
+import 'dart:core';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -151,6 +151,11 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                           TextField(
                             showCursor: true,
+                            // inputFormatters: [
+                            //   FilteringTextInputFormatter.allow(
+                            //     RegExp(r'[A-Z]{5}[0-9]{4}[A-Z]{1}$'),
+                            //   ),
+                            // ],
                             decoration: InputDecoration(
                               contentPadding:
                                   EdgeInsets.symmetric(vertical: 4.5),
