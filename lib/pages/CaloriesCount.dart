@@ -217,6 +217,8 @@ class _CaloriesCountState extends State<CaloriesCount> {
                                           ConnectionState.done) {
                                         List<MenusResponse> carouselCard =
                                             snapshot.data;
+                                        carouselCard.sort((a, b) =>
+                                            b.calories.compareTo(a.calories));
                                         return GridView.builder(
                                           padding:
                                               const EdgeInsets.only(top: 10.0),
