@@ -17,6 +17,7 @@ class AccountCustomer extends StatefulWidget {
 class _AccountCustomerState extends State<AccountCustomer> {
   String currentEvent = "";
   bool edit = false;
+  bool isEditable = false;
 
   TextEditingController fullname = new TextEditingController();
   TextEditingController username = new TextEditingController();
@@ -87,6 +88,7 @@ class _AccountCustomerState extends State<AccountCustomer> {
                       onTap: () {
                         setState(() {
                           edit = true;
+                          isEditable = true;
                         });
                       },
                       child: Icon(Icons.edit),
@@ -241,6 +243,7 @@ class _AccountCustomerState extends State<AccountCustomer> {
                                     Accountservices.updateAccount(sendsave);
                                     setState(() {
                                       edit = false;
+                                      isEditable = false;
                                     });
                                   },
                                   height: 40,
@@ -292,7 +295,7 @@ class _AccountCustomerState extends State<AccountCustomer> {
           filled: true,
           fillColor: Color(0xFFF2F3F5),
           hintStyle: TextStyle(
-              color: Color(0xFF666666),
+              color: Color.fromARGB(255, 13, 10, 10),
               fontFamily: defaultFontFamily,
               fontSize: defaultFontSize),
           hintText: title,
@@ -341,6 +344,7 @@ class BoxShowText extends StatelessWidget {
   }) : super(key: key);
 
   String text;
+  bool isEditable = false;
 
   @override
   Widget build(BuildContext context) {
@@ -352,7 +356,9 @@ class BoxShowText extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       child: Text(text,
-          style: TextStyle(color: Color.fromARGB(255, 111, 118, 123))),
+          style: TextStyle(
+            color: isEditable ? Colors.black : Colors.grey,
+          )),
     );
   }
 }
