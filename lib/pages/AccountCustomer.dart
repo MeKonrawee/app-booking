@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/animation/ScaleRoute.dart';
 import 'package:flutter_app/common/button.dart';
 import 'package:flutter_app/models/response/account_response.dart';
 import 'package:flutter_app/services/account_services.dart';
@@ -18,6 +19,8 @@ class _AccountCustomerState extends State<AccountCustomer> {
   String currentEvent = "";
   bool edit = false;
   bool isEditable = false;
+  Color disableColor = Color.fromARGB(255, 121, 119, 119);
+  Color activeColor = Color.fromARGB(255, 9, 1, 1);
 
   TextEditingController fullname = new TextEditingController();
   TextEditingController username = new TextEditingController();
@@ -88,7 +91,6 @@ class _AccountCustomerState extends State<AccountCustomer> {
                       onTap: () {
                         setState(() {
                           edit = true;
-                          isEditable = true;
                         });
                       },
                       child: Icon(Icons.edit),
@@ -126,6 +128,8 @@ class _AccountCustomerState extends State<AccountCustomer> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: TextField(
+                      style:
+                          TextStyle(color: edit ? activeColor : disableColor),
                       enabled: false,
                       showCursor: true,
                       decoration: InputDecoration(
@@ -243,8 +247,34 @@ class _AccountCustomerState extends State<AccountCustomer> {
                                     Accountservices.updateAccount(sendsave);
                                     setState(() {
                                       edit = false;
-                                      isEditable = false;
                                     });
+                                    return showDialog(
+                                      context: context,
+                                      builder: (ctx) => AlertDialog(
+                                        title: Text(
+                                          "Notification",
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        content: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "ํYour Personal Information has Changed",
+                                            ),
+                                          ],
+                                        ),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(ctx).pop();
+                                            },
+                                            child: Text("Okey"),
+                                          ),
+                                        ],
+                                      ),
+                                    );
                                   },
                                   height: 40,
                                 ),
@@ -268,6 +298,7 @@ class _AccountCustomerState extends State<AccountCustomer> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextField(
+        style: TextStyle(color: edit ? activeColor : disableColor),
         enabled: edit,
         showCursor: true,
         keyboardType: typeModeInput == "Text"
@@ -295,9 +326,7 @@ class _AccountCustomerState extends State<AccountCustomer> {
           filled: true,
           fillColor: Color(0xFFF2F3F5),
           hintStyle: TextStyle(
-              color: Color.fromARGB(255, 13, 10, 10),
-              fontFamily: defaultFontFamily,
-              fontSize: defaultFontSize),
+              fontFamily: defaultFontFamily, fontSize: defaultFontSize),
           hintText: title,
           labelText: title,
         ),
@@ -344,7 +373,6 @@ class BoxShowText extends StatelessWidget {
   }) : super(key: key);
 
   String text;
-  bool isEditable = false;
 
   @override
   Widget build(BuildContext context) {
@@ -355,10 +383,9 @@ class BoxShowText extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
       ),
-      child: Text(text,
-          style: TextStyle(
-            color: isEditable ? Colors.black : Colors.grey,
-          )),
+      child: Text(
+        text,
+      ),
     );
   }
 }
