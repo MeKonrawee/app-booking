@@ -151,11 +151,6 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                           TextField(
                             showCursor: true,
-                            // inputFormatters: [
-                            //   FilteringTextInputFormatter.allow(
-                            //     RegExp(r'[A-Z]{5}[0-9]{4}[A-Z]{1}$'),
-                            //   ),
-                            // ],
                             decoration: InputDecoration(
                               contentPadding:
                                   EdgeInsets.symmetric(vertical: 4.5),
@@ -373,10 +368,6 @@ class _SignUpPageState extends State<SignUpPage> {
                                 child: TextField(
                                   showCursor: true,
                                   keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'[0-9]{0,2}$')),
-                                  ],
                                   decoration: InputDecoration(
                                     contentPadding:
                                         EdgeInsets.symmetric(vertical: 4.5),
@@ -413,11 +404,6 @@ class _SignUpPageState extends State<SignUpPage> {
                                 child: TextField(
                                   showCursor: true,
                                   keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                      RegExp(r'[0-9]{0,3}$'),
-                                    ),
-                                  ],
                                   decoration: InputDecoration(
                                     contentPadding:
                                         EdgeInsets.symmetric(vertical: 4.5),
@@ -454,11 +440,6 @@ class _SignUpPageState extends State<SignUpPage> {
                           TextField(
                             showCursor: true,
                             keyboardType: TextInputType.number,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                RegExp(r'[0-9]{0,10}$'),
-                              ),
-                            ],
                             decoration: InputDecoration(
                               contentPadding:
                                   EdgeInsets.symmetric(vertical: 4.5),
@@ -565,3 +546,5 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 }
+
+// fix the formKey.currentState!.validate() error please
