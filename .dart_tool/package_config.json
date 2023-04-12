@@ -362,6 +362,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "validators",
+      "rootUri": "file:///C:/Users/ASUS/AppData/Local/Pub/Cache/hosted/pub.dev/validators-3.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "vector_math",
       "rootUri": "file:///C:/Users/ASUS/AppData/Local/Pub/Cache/hosted/pub.dev/vector_math-2.1.4",
       "packageUri": "lib/",
@@ -404,7 +410,7 @@
       "languageVersion": "2.2"
     }
   ],
-  "generated": "2023-04-09T16:15:41.878150Z",
+  "generated": "2023-04-12T08:53:31.352998Z",
   "generator": "pub",
   "generatorVersion": "2.19.5"
 }

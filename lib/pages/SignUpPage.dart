@@ -9,6 +9,7 @@ import '../common/button.dart';
 import '../themes/constant.dart';
 import '../services/account_services.dart';
 import 'dart:core';
+import 'package:validators/validators.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -26,6 +27,22 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController height = new TextEditingController();
   TextEditingController phonenumber = new TextEditingController();
   bool passwordHidden = true;
+  bool isEmailCorrect = false;
+
+  @override
+  void dispose() {
+    email.dispose();
+    super.dispose();
+  }
+
+  dynamic snackBar = SnackBar(
+    duration: const Duration(milliseconds: 1500),
+    content: const Text("Your Registration Complete"),
+    action: SnackBarAction(
+      label: 'Got it',
+      onPressed: () {},
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -150,7 +167,18 @@ class _SignUpPageState extends State<SignUpPage> {
                             height: 15,
                           ),
                           TextField(
+                            onChanged: (val) {
+                              setState(() {
+                                isEmailCorrect = isEmail(val);
+                              });
+                            },
                             showCursor: true,
+                            keyboardType: TextInputType.emailAddress,
+                            // inputFormatters: [
+                            //   FilteringTextInputFormatter.allow(
+                            //     RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,5}$'),
+                            //   ),
+                            // ],
                             decoration: InputDecoration(
                               contentPadding:
                                   EdgeInsets.symmetric(vertical: 4.5),
@@ -368,6 +396,12 @@ class _SignUpPageState extends State<SignUpPage> {
                                 child: TextField(
                                   showCursor: true,
                                   keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    LengthLimitingTextInputFormatter(2),
+                                    FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]'),
+                                    ),
+                                  ],
                                   decoration: InputDecoration(
                                     contentPadding:
                                         EdgeInsets.symmetric(vertical: 4.5),
@@ -404,6 +438,12 @@ class _SignUpPageState extends State<SignUpPage> {
                                 child: TextField(
                                   showCursor: true,
                                   keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    LengthLimitingTextInputFormatter(3),
+                                    FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]'),
+                                    ),
+                                  ],
                                   decoration: InputDecoration(
                                     contentPadding:
                                         EdgeInsets.symmetric(vertical: 4.5),
@@ -440,6 +480,12 @@ class _SignUpPageState extends State<SignUpPage> {
                           TextField(
                             showCursor: true,
                             keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(10),
+                              FilteringTextInputFormatter.allow(
+                                RegExp(r'[0-9]'),
+                              ),
+                            ],
                             decoration: InputDecoration(
                               contentPadding:
                                   EdgeInsets.symmetric(vertical: 4.5),
